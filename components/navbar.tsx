@@ -1,0 +1,119 @@
+"use client";
+
+import Link from "next/link";
+import { Search, User, ShoppingBag } from "lucide-react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+export function Navbar() {
+  const navRef = useRef(null);
+  const logoRef = useRef(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const showAnim = gsap
+      .from(navRef.current, {
+        yPercent: -100,
+        paused: true,
+        duration: 0.2,
+      })
+      .progress(1);
+
+    ScrollTrigger.create({
+      start: "top top",
+      end: 99999,
+      onUpdate: (self) => {
+        // Simple direction check: self.direction === -1 ? showAnim.play() : showAnim.reverse();
+        // But for this request ("look good"), let's just do transparency to solid change
+        if (self.scroll() > 50) {
+          gsap.to(navRef.current, {
+            backgroundColor: "gray/50",
+            backdropFilter: "blur(10px)",
+            borderBottomColor: "rgba(38, 38, 38, 1)",
+            paddingTop: "1rem",
+            paddingBottom: "1rem",
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        } else {
+          gsap.to(navRef.current, {
+            backgroundColor: "gray/50",
+            backdropFilter: "blur(0px)",
+            borderBottomColor: "transparent",
+            paddingTop: "1.5rem",
+            paddingBottom: "1.5rem",
+            duration: 0.3,
+            ease: "power2.out",
+          });
+        }
+      },
+    });
+  }, []);
+
+  return (
+    <nav
+      ref={navRef}
+      className="fixed top-0 left-0 w-full z-50 text-white p-6 border-b border-transparent transition-all"
+    >
+      <div className="container mx-auto flex items-center justify-between">
+        {/* Logo Section */}
+        <div className="flex-shrink-0" ref={logoRef}>
+          <Link href="/" className="text-2xl font-bold tracking-tighter">
+            {/* Placeholder for the logo from the image */}
+            <span className="font-mono italic border-b-2 border-white pb-1">
+              Rang Virangi
+            </span>
+          </Link>
+        </div>
+
+        {/* Navigation Links */}
+        <div className="hidden lg:flex items-center gap-8 text-sm font-medium">
+          <Link
+            href="/"
+            className="hover:text-gray-300 transition-colors underline decoration-white underline-offset-4"
+          >
+            Home
+          </Link>
+          <Link href="/shop" className="hover:text-gray-300 transition-colors">
+            Shop
+          </Link>
+          <Link href="/about" className="hover:text-gray-300 transition-colors">
+            About
+          </Link>
+          <Link
+            href="/contact"
+            className="hover:text-gray-300 transition-colors"
+          >
+            Contact
+          </Link>
+        </div>
+
+        {/* Icons Section */}
+        <div className="flex items-center gap-4">
+          <button
+            aria-label="Search"
+            className="hover:text-gray-300 transition-colors"
+          >
+            <Search className="w-5 h-5" />
+          </button>
+          <Link
+            href="/account"
+            aria-label="Account"
+            className="hover:text-gray-300 transition-colors"
+          >
+            <User className="w-5 h-5" />
+          </Link>
+          <Link
+            href="/cart"
+            aria-label="Cart"
+            className="hover:text-gray-300 transition-colors"
+          >
+            <ShoppingBag className="w-5 h-5" />
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
+}
