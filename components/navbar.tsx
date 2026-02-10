@@ -58,7 +58,7 @@ export function Navbar() {
     <nav
       ref={navRef}
       className="fixed top-0 left-0 w-full z-50 text-white p-6 transition-all"
-      style={{ backgroundColor: "rgba(38, 38, 38, 1)" }}
+      style={{ backgroundColor: "rgba(0, 0, 0, 1)" }}
     >
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo Section */}
