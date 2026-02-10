@@ -1,106 +1,219 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const storyCards = [
+  {
+    tag: "THE STORY",
+    title: "Born From Frustration",
+    body: "Rang Virangi was born from a mission to rebuild the everyday wardrobe from the fabric up. We discovered the answer in bamboo cotton — nature's most underrated luxury fiber.",
+    accent: "border-amber-700/40",
+    glow: "bg-amber-900/10",
+    number: "01",
+  },
+  {
+    tag: "WHY BAMBOO?",
+    title: "Quality Isn't Seasonal",
+    body: "Bamboo fabric lasts longer, feels smoother, and leaves a lighter footprint on the planet. It's sustainable luxury — not a gimmick, but a mindset.",
+    accent: "border-emerald-700/40",
+    glow: "bg-emerald-900/10",
+    number: "02",
+  },
+  {
+    tag: "THE CRAFT",
+    title: "Softer Than Cotton",
+    body: "Naturally breathable and thermoregulating. It moves with you, not against you. Every thread feels calm, cool, and clean — made to be worn every damn day.",
+    accent: "border-sky-700/40",
+    glow: "bg-sky-900/10",
+    number: "03",
+  },
+  {
+    tag: "THE VISION",
+    title: "Redefining Basics",
+    body: "We stand for balance — between comfort and style, function and emotion, street and sophistication. Not cheap. Not common — but crafted, considered, and timeless.",
+    accent: "border-violet-700/40",
+    glow: "bg-violet-900/10",
+    number: "04",
+  },
+];
 
 export function AboutStory() {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
+  const introRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const footerRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Heading slide in
+      gsap.fromTo(
+        headingRef.current,
+        { x: -60, opacity: 0 },
+        {
+          x: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        },
+      );
+
+      // Intro card fade
+      gsap.fromTo(
+        introRef.current,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          delay: 0.15,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+            toggleActions: "play none none reverse",
+          },
+        },
+      );
+
+      // Cards stagger in
+      cardsRef.current.forEach((card, i) => {
+        if (!card) return;
+        gsap.fromTo(
+          card,
+          { y: 60, opacity: 0, scale: 0.97 },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.7,
+            delay: i * 0.12,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 85%",
+              toggleActions: "play none none reverse",
+            },
+          },
+        );
+      });
+
+      // Footer text
+      gsap.fromTo(
+        footerRef.current,
+        { opacity: 0 },
+        {
+          opacity: 1,
+          duration: 1,
+          delay: 0.3,
+          scrollTrigger: {
+            trigger: footerRef.current,
+            start: "top 90%",
+            toggleActions: "play none none reverse",
+          },
+        },
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
-    <section className="w-full bg-black py-16 px-4 md:px-8 border-t border-neutral-800">
-      <div className="w-full">
+    <section
+      ref={sectionRef}
+      className="w-full bg-black py-20 md:py-28 px-4 md:px-8 border-t border-neutral-800 overflow-hidden"
+    >
+      <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <h2 className="text-white text-sm md:text-base font-bold tracking-widest mb-8">
-          Rang Virangi
-        </h2>
-
-        {/* Intro */}
-        <p className="text-white text-sm md:text-base tracking-wide leading-relaxed mb-8">
-          India&apos;s fashion scene has evolved fast -{" "}
-          <span className="text-neutral-400 font-semibold">
-            but something essential was missing.
-          </span>
-        </p>
-
-        <p className="text-white text-sm md:text-base tracking-wide leading-relaxed mb-12">
-          Between fast fashion and luxury hype, quality basics were forgotten.
-          The market overflowed with cotton tees that looked premium on launch
-          day but lost their soul after two washes.
-        </p>
-
-        {/* Expandable Content */}
-        <div
-          className={`overflow-hidden transition-all duration-500 ${isExpanded ? "max-h-[2000px] opacity-100" : "max-h-0 opacity-0"}`}
-        >
-          {/* The Story */}
-          <div className="mb-12">
-            <h3 className="text-white text-sm font-bold tracking-widest mb-4">
-              The Story
-            </h3>
-            <p className="text-white text-sm md:text-base tracking-wide leading-relaxed mb-4">
-              Rang Virangi was born from that frustration - and a mission to
-              rebuild the everyday wardrobe from the fabric up.
-            </p>
-            <p className="text-white text-sm md:text-base tracking-wide leading-relaxed">
-              We discovered the answer in bamboo cotton - nature&apos;s most
-              underrated luxury fiber. Softer than conventional cotton,
-              naturally breathable, and thermoregulating. It moves with you, not
-              against you. Every thread feels calm, cool, and clean - made to be
-              worn every damn day.
-            </p>
-          </div>
-
-          {/* Why Bamboo */}
-          <div className="mb-12">
-            <h3 className="text-white text-sm font-bold tracking-widest mb-4">
-              Why Bamboo?
-            </h3>
-            <p className="text-white text-sm md:text-base tracking-wide leading-relaxed mb-4">
-              Because quality shouldn&apos;t be seasonal.
-            </p>
-            <p className="text-white text-sm md:text-base tracking-wide leading-relaxed mb-4">
-              Bamboo fabric lasts longer, feels smoother, and{" "}
-              <span className="text-neutral-400 font-semibold">
-                leaves a lighter footprint on the planet.
-              </span>
-            </p>
-            <p className="text-white text-sm md:text-base tracking-wide leading-relaxed mb-4">
-              It&apos;s sustainable luxury - not a gimmick, but a mindset.
-            </p>
-            <p className="text-white text-sm md:text-base tracking-wide leading-relaxed">
-              Our tees aren&apos;t built to shout. They&apos;re built to stay.
-              To become your everyday armor - minimal, elevated, essential.
-            </p>
-          </div>
-
-          {/* The Vision */}
-          <div className="mb-12">
-            <h3 className="text-white text-sm font-bold tracking-widest mb-4">
-              The Vision
-            </h3>
-            <p className="text-white text-sm md:text-base tracking-wide leading-relaxed mb-4">
-              Rang Virangi stands for balance - between comfort and style,
-              function and emotion, street and sophistication.
-            </p>
-            <p className="text-white text-sm md:text-base tracking-wide leading-relaxed mb-4">
-              We&apos;re redefining what &quot;basics&quot; mean in India. Not
-              cheap. Not common - but crafted, considered, and timeless.
-            </p>
-            <p className="text-white text-sm md:text-base tracking-wide leading-relaxed">
-              <span className="text-neutral-400 font-semibold">
-                Rang Virangi | Made for those who demand more - even from the
-                simplest things.
-              </span>
-            </p>
-          </div>
+        <div ref={headingRef} className="mb-10 md:mb-14" style={{ opacity: 0 }}>
+          <p className="text-neutral-500 text-[10px] md:text-xs uppercase tracking-[0.4em] mb-3">
+            Our Story
+          </p>
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none">
+            RANG VIRANGI
+          </h2>
         </div>
 
-        {/* Read More/Less Button */}
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="text-white text-xs tracking-widest font-semibold hover:text-neutral-400 transition-colors duration-300 underline underline-offset-4"
+        {/* Intro card — full width */}
+        <div
+          ref={introRef}
+          className="relative mb-6 md:mb-8 p-6 md:p-10 border border-neutral-800 bg-neutral-950 overflow-hidden"
+          style={{ opacity: 0 }}
         >
-          {isExpanded ? "Read Less" : "Read More"}
-        </button>
+          {/* Subtle corner accent */}
+          <div className="absolute top-0 left-0 w-16 h-16 md:w-24 md:h-24 border-b border-r border-neutral-800" />
+          <div className="absolute bottom-0 right-0 w-16 h-16 md:w-24 md:h-24 border-t border-l border-neutral-800" />
+
+          <p className="text-white text-base md:text-xl lg:text-2xl tracking-wide leading-relaxed max-w-4xl">
+            India&apos;s fashion scene has evolved fast —{" "}
+            <span className="text-neutral-500">
+              but something essential was missing.
+            </span>
+          </p>
+          <p className="text-neutral-400 text-sm md:text-base tracking-wide leading-relaxed mt-4 max-w-3xl">
+            Between fast fashion and luxury hype, quality basics were forgotten.
+            The market overflowed with cotton tees that looked premium on launch
+            day but lost their soul after two washes.
+          </p>
+        </div>
+
+        {/* Cards grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+          {storyCards.map((card, i) => (
+            <div
+              key={card.number}
+              ref={(el) => {
+                cardsRef.current[i] = el;
+              }}
+              className={`group relative p-6 md:p-8 border ${card.accent} bg-neutral-950 overflow-hidden transition-all duration-500 hover:border-opacity-80`}
+              style={{ opacity: 0 }}
+            >
+              {/* Background glow */}
+              <div
+                className={`absolute -top-20 -right-20 w-40 h-40 rounded-full ${card.glow} blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700`}
+              />
+
+              {/* Number watermark */}
+              <span className="absolute top-4 right-5 md:top-5 md:right-7 text-neutral-900 text-5xl md:text-7xl font-black select-none pointer-events-none group-hover:text-neutral-800/50 transition-colors duration-500">
+                {card.number}
+              </span>
+
+              {/* Content */}
+              <div className="relative z-10">
+                <p className="text-neutral-600 text-[10px] md:text-[11px] uppercase tracking-[0.35em] font-semibold mb-3">
+                  {card.tag}
+                </p>
+                <h3 className="text-white text-lg md:text-xl font-bold tracking-wide mb-4 group-hover:translate-x-1 transition-transform duration-300">
+                  {card.title}
+                </h3>
+                <p className="text-neutral-400 text-sm md:text-base leading-relaxed tracking-wide">
+                  {card.body}
+                </p>
+              </div>
+
+              {/* Bottom accent line */}
+              <div className="absolute bottom-0 left-0 h-px w-0 bg-linear-to-r from-white/20 to-transparent group-hover:w-full transition-all duration-700 ease-out" />
+            </div>
+          ))}
+        </div>
+
+        {/* Footer tagline */}
+        <p
+          ref={footerRef}
+          className="text-center text-neutral-600 text-xs md:text-sm tracking-[0.3em] uppercase mt-12 md:mt-16"
+          style={{ opacity: 0 }}
+        >
+          Made for those who demand more — even from the simplest things.
+        </p>
       </div>
     </section>
   );

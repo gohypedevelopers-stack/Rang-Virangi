@@ -31,9 +31,9 @@ export function Navbar() {
         // But for this request ("look good"), let's just do transparency to solid change
         if (self.scroll() > 50) {
           gsap.to(navRef.current, {
-            backgroundColor: "gray/50",
-            backdropFilter: "blur(10px)",
-            borderBottomColor: "rgba(38, 38, 38, 1)",
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backdropFilter: "blur(16px)",
+            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.3)",
             paddingTop: "1rem",
             paddingBottom: "1rem",
             duration: 0.3,
@@ -41,9 +41,9 @@ export function Navbar() {
           });
         } else {
           gsap.to(navRef.current, {
-            backgroundColor: "gray/50",
+            backgroundColor: "rgba(0, 0, 0, 0)",
             backdropFilter: "blur(0px)",
-            borderBottomColor: "transparent",
+            boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
             paddingTop: "1.5rem",
             paddingBottom: "1.5rem",
             duration: 0.3,
@@ -57,7 +57,8 @@ export function Navbar() {
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 left-0 w-full z-50 text-white p-6 border-b border-transparent transition-all"
+      className="fixed top-0 left-0 w-full z-50 text-white p-6 transition-all"
+      style={{ backgroundColor: "rgba(38, 38, 38, 1)" }}
     >
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo Section */}

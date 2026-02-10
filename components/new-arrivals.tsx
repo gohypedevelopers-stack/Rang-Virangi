@@ -25,7 +25,7 @@ export function NewArrivals() {
   };
 
   return (
-    <section className="w-full bg-black py-16 px-4 md:px-8 border-t border-neutral-800">
+    <section className="w-full bg-black py-17 px-4 md:px-8 border-t border-neutral-800">
       <div className="w-full">
         <h2 className="text-2xl md:text-3xl font-bold text-white mb-8 tracking-wider uppercase">
           New Arrivals
@@ -36,7 +36,7 @@ export function NewArrivals() {
             <div key={product.id} className="group relative">
               <Link href={`/product/${product.id}`} className="block">
                 {/* Image Container */}
-                <div className="relative aspect-3/4 overflow-hidden bg-neutral-900 mb-3">
+                <div className="relative aspect-3/4 overflow-hidden bg-neutral-900 mb-5">
                   <Image
                     src={product.image}
                     alt={product.name}
@@ -45,7 +45,7 @@ export function NewArrivals() {
                     className="object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   {product.isSale && (
-                    <span className="absolute top-2 left-2 bg-white text-black text-[10px] font-bold px-2 py-1 uppercase">
+                    <span className="absolute top-2 left-2 bg-white text-black border border-black shadow-lg text-[14px] font-bold px-2 py-1 uppercase">
                       Sale
                     </span>
                   )}
@@ -70,13 +70,13 @@ export function NewArrivals() {
                       {product.variant}
                     </p>
                   )}
-                  <div className="flex items-center gap-2 pt-1">
+                  <div className="flex items-center gap-2 pt-1 mb-5">
                     {product.originalPrice && (
                       <span className="text-neutral-500 text-xs line-through">
                         ₹{product.originalPrice.toLocaleString()}
                       </span>
                     )}
-                    <span className="text-white text-xs font-medium">
+                    <span className="text-white text-s font-medium ">
                       ₹{product.price.toLocaleString()}
                     </span>
                   </div>
