@@ -126,7 +126,7 @@ function Footer() {
           </div>
         </div>
         <div className="w-full flex mt-8 items-center justify-center">
-          <h1 className="text-center text-4xl md:text-6xl lg:text-[10rem] font-black uppercase bg-clip-text text-transparent bg-gradient-to-b from-neutral-600 to-neutral-900 select-none tracking-tighter">
+          <h1 className="text-center text-4xl md:text-6xl lg:text-[11rem] overflow-hidden uppercase font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-600 to-neutral-900 select-none tracking-wider whitespace-nowrap">
             Rang Virangi
           </h1>
         </div>

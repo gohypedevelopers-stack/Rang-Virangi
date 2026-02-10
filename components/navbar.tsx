@@ -5,10 +5,12 @@ import { Search, User, ShoppingBag } from "lucide-react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useCart } from "../context/cart-context";
 
 export function Navbar() {
   const navRef = useRef(null);
   const logoRef = useRef(null);
+  const { openCart, setCartBtnRef, cartItems } = useCart();
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -105,13 +107,19 @@ export function Navbar() {
           >
             <User className="w-5 h-5" />
           </Link>
-          <Link
-            href="/cart"
+          <button
             aria-label="Cart"
-            className="hover:text-gray-300 transition-colors"
+            className="hover:text-gray-300 transition-colors relative"
+            onClick={openCart}
+            ref={setCartBtnRef}
           >
             <ShoppingBag className="w-5 h-5" />
-          </Link>
+            {cartItems.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-white text-black text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
+                {cartItems.length}
+              </span>
+            )}
+          </button>
         </div>
       </div>
     </nav>
