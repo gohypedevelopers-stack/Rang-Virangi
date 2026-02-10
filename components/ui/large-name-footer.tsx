@@ -3,10 +3,10 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <footer className="py-12 px-4 md:px-8 bg-black border-t border-neutral-800">
+    <footer className="py-15 px-4 md:px-8 bg-black border-t border-neutral-800">
       <div className="w-full">
         <div className="flex flex-col md:flex-row justify-between">
-          <div className="mb-8 md:mb-0">
+          <div className="mb-10 md:mb-8">
             <Link href="/" className="flex items-center gap-2">
               <h2 className="text-xl font-bold text-white">Rang Virangi</h2>
             </Link>
@@ -126,7 +126,7 @@ function Footer() {
           </div>
         </div>
         <div className="w-full flex mt-8 items-center justify-center">
-          <h1 className="text-center text-4xl md:text-6xl lg:text-[11rem] overflow-hidden uppercase font-medium bg-clip-text text-transparent bg-gradient-to-b from-neutral-600 to-neutral-900 select-none tracking-wider whitespace-nowrap">
+          <h1 className="text-center text-4xl md:text-6xl lg:text-[11.5rem] scale-y-125 overflow-hidden uppercase font-medium bg-clip-text text-white select-none tracking-wider whitespace-nowrap">
             Rang Virangi
           </h1>
         </div>

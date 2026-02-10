@@ -102,8 +102,8 @@ export function Categories() {
               href={item.href}
               className="group flex flex-col items-center gap-3 min-w-[120px] md:min-w-[140px] flex-shrink-0"
             >
-              <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border border-white flex items-center justify-center transition-transform duration-300 group-hover:scale-105 group-hover:bg-neutral-900">
-                <div className="text-white transform scale-90 group-hover:scale-100 transition-transform duration-300 group-hover:stroke-[1.5]">
+              <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border border-white flex items-center justify-center transition-colors duration-300 group-hover:bg-white group-hover:border-transparent">
+                <div className="text-white transition-colors duration-300 group-hover:text-black">
                   {item.icon}
                 </div>
               </div>
