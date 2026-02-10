@@ -31,7 +31,7 @@ export function Navbar() {
         // But for this request ("look good"), let's just do transparency to solid change
         if (self.scroll() > 50) {
           gsap.to(navRef.current, {
-            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            backgroundColor: "rgba(0, 0, 0, 0)",
             backdropFilter: "blur(16px)",
             boxShadow: "0 4px 30px rgba(0, 0, 0, 0.3)",
             paddingTop: "1rem",
@@ -41,7 +41,7 @@ export function Navbar() {
           });
         } else {
           gsap.to(navRef.current, {
-            backgroundColor: "rgba(0, 0, 0, 0)",
+            backgroundColor: "rgba(0, 0, 0, 5)",
             backdropFilter: "blur(0px)",
             boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
             paddingTop: "1.5rem",
