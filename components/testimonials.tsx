@@ -67,7 +67,7 @@ function StarRating({ count }: { count: number }) {
         <svg
           key={i}
           viewBox="0 0 16 16"
-          className={`w-3 h-3 ${i < count ? "text-white" : "text-neutral-700"}`}
+          className={`w-3 h-3 ${i < count ? "text-black" : "text-neutral-300"}`}
           fill="currentColor"
         >
           <path d="M8 0l2.47 4.94L16 5.73l-4 3.87.94 5.46L8 12.47l-4.94 2.59L4 9.6 0 5.73l5.53-.79L8 0z" />
@@ -83,21 +83,21 @@ function TestimonialCard({
   testimonial: (typeof testimonials)[0];
 }) {
   return (
-    <div className="shrink-0 w-[300px] md:w-[360px] bg-neutral-900/60 border border-neutral-800 p-6 md:p-7 backdrop-blur-sm">
+    <div className="shrink-0 w-[300px] md:w-[360px] bg-white/80 border border-neutral-200 p-6 md:p-7 backdrop-blur-sm shadow-sm">
       <StarRating count={testimonial.stars} />
-      <p className="text-neutral-300 text-sm leading-relaxed mt-4 mb-5 tracking-wide">
+      <p className="text-neutral-700 text-sm leading-relaxed mt-4 mb-5 tracking-wide">
         &ldquo;{testimonial.text}&rdquo;
       </p>
       <div className="flex items-center gap-3">
         {/* Avatar placeholder */}
-        <div className="w-8 h-8 rounded-full bg-neutral-800 border border-neutral-700 flex items-center justify-center text-white text-[10px] font-bold">
+        <div className="w-8 h-8 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center text-black text-[10px] font-bold">
           {testimonial.name.charAt(0)}
         </div>
         <div>
-          <p className="text-white text-xs font-semibold tracking-wide">
+          <p className="text-black text-xs font-semibold tracking-wide">
             {testimonial.name}
           </p>
-          <p className="text-neutral-600 text-[10px] tracking-wider uppercase">
+          <p className="text-neutral-400 text-[10px] tracking-wider uppercase">
             {testimonial.location}
           </p>
         </div>
@@ -170,7 +170,7 @@ export function Testimonials() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-black py-20 md:py-28 border-t border-neutral-800 overflow-hidden"
+      className="w-full bg-white py-20 md:py-28 border-t border-neutral-200 overflow-hidden"
     >
       {/* Heading */}
       <div
@@ -181,7 +181,7 @@ export function Testimonials() {
         <p className="text-neutral-500 text-[10px] md:text-xs uppercase tracking-[0.4em] mb-3">
           What People Are Saying
         </p>
-        <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
+        <h2 className="text-3xl md:text-5xl font-black text-black tracking-tight">
           REAL REVIEWS
         </h2>
       </div>

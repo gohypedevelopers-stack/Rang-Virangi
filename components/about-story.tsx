@@ -130,7 +130,7 @@ export function AboutStory() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-black py-20 md:py-28 px-4 md:px-8 border-t border-neutral-800 overflow-hidden"
+      className="w-full bg-white py-20 md:py-28 px-4 md:px-8 border-t border-neutral-200 overflow-hidden"
     >
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -138,7 +138,7 @@ export function AboutStory() {
           <p className="text-neutral-500 text-[10px] md:text-xs uppercase tracking-[0.4em] mb-3">
             Our Story
           </p>
-          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tight leading-none">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-black tracking-tight leading-none">
             RANG VIRANGI
           </h2>
         </div>
@@ -146,20 +146,20 @@ export function AboutStory() {
         {/* Intro card — full width */}
         <div
           ref={introRef}
-          className="relative mb-6 md:mb-8 p-6 md:p-10 border border-neutral-800 bg-neutral-950 overflow-hidden"
+          className="relative mb-6 md:mb-8 p-6 md:p-10 border border-neutral-200 bg-neutral-50 overflow-hidden"
           style={{ opacity: 0 }}
         >
           {/* Subtle corner accent */}
-          <div className="absolute top-0 left-0 w-16 h-16 md:w-24 md:h-24 border-b border-r border-neutral-800" />
-          <div className="absolute bottom-0 right-0 w-16 h-16 md:w-24 md:h-24 border-t border-l border-neutral-800" />
+          <div className="absolute top-0 left-0 w-16 h-16 md:w-24 md:h-24 border-b border-r border-neutral-300" />
+          <div className="absolute bottom-0 right-0 w-16 h-16 md:w-24 md:h-24 border-t border-l border-neutral-300" />
 
-          <p className="text-white text-base md:text-xl lg:text-2xl tracking-wide leading-relaxed max-w-4xl">
+          <p className="text-black text-base md:text-xl lg:text-2xl tracking-wide leading-relaxed max-w-4xl">
             India&apos;s fashion scene has evolved fast —{" "}
             <span className="text-neutral-500">
               but something essential was missing.
             </span>
           </p>
-          <p className="text-neutral-400 text-sm md:text-base tracking-wide leading-relaxed mt-4 max-w-3xl">
+          <p className="text-neutral-600 text-sm md:text-base tracking-wide leading-relaxed mt-4 max-w-3xl">
             Between fast fashion and luxury hype, quality basics were forgotten.
             The market overflowed with cotton tees that looked premium on launch
             day but lost their soul after two washes.
@@ -174,7 +174,7 @@ export function AboutStory() {
               ref={(el) => {
                 cardsRef.current[i] = el;
               }}
-              className={`group relative p-6 md:p-8 border ${card.accent} bg-neutral-950 overflow-hidden transition-all duration-500 hover:border-opacity-80`}
+              className={`group relative p-6 md:p-8 border ${card.accent} bg-white overflow-hidden transition-all duration-500 hover:border-opacity-80 shadow-sm`}
               style={{ opacity: 0 }}
             >
               {/* Background glow */}
@@ -183,25 +183,25 @@ export function AboutStory() {
               />
 
               {/* Number watermark */}
-              <span className="absolute top-4 right-5 md:top-5 md:right-7 text-neutral-900 text-5xl md:text-7xl font-black select-none pointer-events-none group-hover:text-neutral-800/50 transition-colors duration-500">
+              <span className="absolute top-4 right-5 md:top-5 md:right-7 text-neutral-100 text-5xl md:text-7xl font-black select-none pointer-events-none group-hover:text-neutral-200/50 transition-colors duration-500">
                 {card.number}
               </span>
 
               {/* Content */}
               <div className="relative z-10">
-                <p className="text-neutral-600 text-[10px] md:text-[11px] uppercase tracking-[0.35em] font-semibold mb-3">
+                <p className="text-neutral-500 text-[10px] md:text-[11px] uppercase tracking-[0.35em] font-semibold mb-3">
                   {card.tag}
                 </p>
-                <h3 className="text-white text-lg md:text-xl font-bold tracking-wide mb-4 group-hover:translate-x-1 transition-transform duration-300">
+                <h3 className="text-black text-lg md:text-xl font-bold tracking-wide mb-4 group-hover:translate-x-1 transition-transform duration-300">
                   {card.title}
                 </h3>
-                <p className="text-neutral-400 text-sm md:text-base leading-relaxed tracking-wide">
+                <p className="text-neutral-600 text-sm md:text-base leading-relaxed tracking-wide">
                   {card.body}
                 </p>
               </div>
 
               {/* Bottom accent line */}
-              <div className="absolute bottom-0 left-0 h-px w-0 bg-linear-to-r from-white/20 to-transparent group-hover:w-full transition-all duration-700 ease-out" />
+              <div className="absolute bottom-0 left-0 h-px w-0 bg-linear-to-r from-black/20 to-transparent group-hover:w-full transition-all duration-700 ease-out" />
             </div>
           ))}
         </div>
@@ -209,7 +209,7 @@ export function AboutStory() {
         {/* Footer tagline */}
         <p
           ref={footerRef}
-          className="text-center text-neutral-600 text-xs md:text-sm tracking-[0.3em] uppercase mt-12 md:mt-16"
+          className="text-center text-neutral-500 text-xs md:text-sm tracking-[0.3em] uppercase mt-12 md:mt-16"
           style={{ opacity: 0 }}
         >
           Made for those who demand more — even from the simplest things.

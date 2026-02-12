@@ -89,9 +89,9 @@ const categories = [
 
 export function Categories() {
   return (
-    <section className="w-full bg-black py-12 md:py-16 px-4 md:px-8 border-t border-neutral-800">
+    <section className="w-full bg-white py-12 md:py-16 px-4 md:px-8 border-t border-neutral-200">
       <div className="w-full">
-        <h2 className="text-2xl font-bold text-white mb-8 tracking-wider">
+        <h2 className="text-2xl font-bold text-black mb-8 tracking-wider">
           CATEGORIES
         </h2>
 
@@ -102,12 +102,12 @@ export function Categories() {
               href={item.href}
               className="group flex flex-col items-center gap-3 min-w-[120px] md:min-w-[140px] flex-shrink-0"
             >
-              <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border border-white flex items-center justify-center transition-colors duration-300 group-hover:bg-white group-hover:border-transparent">
-                <div className="text-white transition-colors duration-300 group-hover:text-black">
+              <div className="w-28 h-28 md:w-36 md:h-36 rounded-full border border-black flex items-center justify-center transition-colors duration-300 group-hover:bg-black group-hover:border-transparent">
+                <div className="text-black transition-colors duration-300 group-hover:text-white">
                   {item.icon}
                 </div>
               </div>
-              <span className="text-white text-xs md:text-sm font-medium tracking-wide text-center uppercase">
+              <span className="text-black text-xs md:text-sm font-medium tracking-wide text-center uppercase">
                 {item.name}
               </span>
             </Link>

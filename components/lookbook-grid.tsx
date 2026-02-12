@@ -103,11 +103,11 @@ export function LookbookGrid() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-black py-20 md:py-28 px-4 md:px-8 border-t border-neutral-800"
+      className="w-full bg-white py-20 md:py-28 px-4 md:px-8 border-t border-neutral-200"
     >
       <div className="max-w-7xl mx-auto">
         {/* Split-text heading */}
-        <h2 className="text-center text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-white mb-14 md:mb-20">
+        <h2 className="text-center text-4xl md:text-6xl lg:text-7xl font-black tracking-tight text-black mb-14 md:mb-20">
           {headingText.split("").map((char, i) => (
             <span
               key={i}
@@ -148,21 +148,21 @@ export function LookbookGrid() {
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
               />
 
-              {/* Dark gradient overlay */}
-              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/20 to-transparent transition-all duration-500 group-hover:from-black/80" />
+              {/* Light gradient overlay */}
+              <div className="absolute inset-0 bg-linear-to-t from-white/90 via-white/30 to-transparent transition-all duration-500 group-hover:from-white/95" />
 
               {/* Content — always visible at bottom */}
               <div className="absolute inset-0 flex flex-col justify-end p-4 md:p-6">
-                <p className="text-white/50 text-[10px] md:text-xs uppercase tracking-[0.3em] mb-1 transition-colors duration-300 group-hover:text-white/80">
+                <p className="text-black/60 text-[10px] md:text-xs uppercase tracking-[0.3em] mb-1 transition-colors duration-300 group-hover:text-black/90">
                   {item.sublabel}
                 </p>
-                <h3 className="text-white text-sm md:text-lg font-bold tracking-wider transition-transform duration-300 group-hover:translate-x-2">
+                <h3 className="text-black text-sm md:text-lg font-bold tracking-wider transition-transform duration-300 group-hover:translate-x-2">
                   {item.label}
                 </h3>
               </div>
 
               {/* Corner accent */}
-              <div className="absolute top-3 right-3 md:top-4 md:right-4 w-6 h-6 md:w-8 md:h-8 border-t border-r border-white/15 group-hover:border-white/40 transition-colors duration-300" />
+              <div className="absolute top-3 right-3 md:top-4 md:right-4 w-6 h-6 md:w-8 md:h-8 border-t border-r border-black/15 group-hover:border-black/40 transition-colors duration-300" />
             </div>
           ))}
         </div>

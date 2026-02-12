@@ -175,19 +175,19 @@ export function FeaturesShowcase() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-black py-20 md:py-28 px-4 md:px-8 border-t border-neutral-800 overflow-hidden"
+      className="relative w-full bg-white py-20 md:py-28 px-4 md:px-8 border-t border-neutral-200 overflow-hidden"
     >
       {/* Animated horizontal line */}
       <div
         ref={lineRef}
-        className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-white/40 to-transparent origin-left"
+        className="absolute top-0 left-0 right-0 h-px bg-linear-to-r from-transparent via-black/10 to-transparent origin-left"
         style={{ transform: "scaleX(0)" }}
       />
 
       <div className="max-w-7xl mx-auto">
         <h2
           ref={headingRef}
-          className="text-center text-xs md:text-sm uppercase tracking-[0.4em] text-neutral-400 font-medium mb-16 md:mb-20"
+          className="text-center text-xs md:text-sm uppercase tracking-[0.4em] text-neutral-500 font-medium mb-16 md:mb-20"
           style={{ opacity: 0 }}
         >
           Why Bamboo Cotton?
@@ -204,17 +204,17 @@ export function FeaturesShowcase() {
               style={{ opacity: 0 }}
             >
               {/* Icon circle */}
-              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border border-neutral-700 flex items-center justify-center text-white transition-all duration-500 group-hover:border-white group-hover:bg-white/5 group-hover:scale-110">
+              <div className="w-20 h-20 md:w-24 md:h-24 rounded-full border border-neutral-200 flex items-center justify-center text-black transition-all duration-500 group-hover:border-black group-hover:bg-black/5 group-hover:scale-110">
                 {feature.icon}
               </div>
 
               {/* Title */}
-              <h3 className="text-white text-xs md:text-sm font-bold tracking-[0.25em]">
+              <h3 className="text-black text-xs md:text-sm font-bold tracking-[0.25em]">
                 {feature.title}
               </h3>
 
               {/* Tagline */}
-              <p className="text-neutral-500 text-[11px] md:text-xs tracking-wide leading-relaxed max-w-[180px]">
+              <p className="text-neutral-600 text-[11px] md:text-xs tracking-wide leading-relaxed max-w-[180px]">
                 {feature.tagline}
               </p>
             </div>

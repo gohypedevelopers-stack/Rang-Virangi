@@ -120,10 +120,10 @@ export function CTASection() {
         />
       </div>
 
-      {/* Dark Overlay */}
+      {/* Light Overlay */}
       <div
         ref={overlayRef}
-        className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-black/60"
+        className="absolute inset-0 bg-gradient-to-t from-white via-white/80 to-white/60"
       />
 
       {/* Subtle grain texture overlay */}
@@ -138,14 +138,14 @@ export function CTASection() {
       <div className="relative z-10 max-w-3xl space-y-8 px-4 md:px-8 py-24">
         <h2
           ref={headingRef}
-          className="text-4xl md:text-6xl font-bold text-white tracking-tight"
+          className="text-4xl md:text-6xl font-bold text-black tracking-tight"
           style={{ opacity: 0 }}
         >
           ELEVATE YOUR EVERYDAY.
         </h2>
         <p
           ref={paraRef}
-          className="text-neutral-300 text-lg md:text-xl tracking-wide max-w-2xl mx-auto"
+          className="text-neutral-700 text-lg md:text-xl tracking-wide max-w-2xl mx-auto"
           style={{ opacity: 0 }}
         >
           Experience the unmatched comfort of bamboo cotton. Sustainable,
@@ -155,7 +155,7 @@ export function CTASection() {
         <div ref={buttonRef} className="pt-4" style={{ opacity: 0 }}>
           <Link
             href="/shop"
-            className="group inline-flex items-center gap-3 bg-white text-black px-8 py-4 text-sm md:text-base font-bold tracking-widest uppercase hover:bg-neutral-200 transition-all duration-300 hover:gap-5"
+            className="group inline-flex items-center gap-3 bg-black text-white px-8 py-4 text-sm md:text-base font-bold tracking-widest uppercase hover:bg-neutral-800 transition-all duration-300 hover:gap-5"
           >
             Shop Collection
             <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />

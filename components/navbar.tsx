@@ -22,51 +22,20 @@ export function Navbar() {
         duration: 0.2,
       })
       .progress(1);
-
-    ScrollTrigger.create({
-      start: "top top",
-      end: 99999,
-      onUpdate: (self) => {
-        // Simple direction check: self.direction === -1 ? showAnim.play() : showAnim.reverse();
-        // But for this request ("look good"), let's just do transparency to solid change
-        if (self.scroll() > 50) {
-          gsap.to(navRef.current, {
-            backgroundColor: "rgba(0, 0, 0, 0)",
-            backdropFilter: "blur(16px)",
-            boxShadow: "0 4px 30px rgba(0, 0, 0, 0.3)",
-            paddingTop: "1rem",
-            paddingBottom: "1rem",
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        } else {
-          gsap.to(navRef.current, {
-            backgroundColor: "rgba(0, 0, 0, 5)",
-            backdropFilter: "blur(0px)",
-            boxShadow: "0 0 0 rgba(0, 0, 0, 0)",
-            paddingTop: "1.5rem",
-            paddingBottom: "1.5rem",
-            duration: 0.3,
-            ease: "power2.out",
-          });
-        }
-      },
-    });
   }, []);
 
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 left-0 w-full z-50 text-white p-6 transition-all"
-      style={{ backgroundColor: "rgba(0, 0, 0, 1)" }}
+      className="fixed top-0 left-0 w-full z-50 text-black p-6 transition-all bg-white/95 backdrop-blur-md shadow-sm"
     >
       <div className="container mx-auto flex items-center justify-between">
         {/* Logo Section */}
         <div className="flex-shrink-0" ref={logoRef}>
           <Link href="/" className="text-2xl font-bold tracking-tighter">
             {/* Placeholder for the logo from the image */}
-            <span className="font-mono italic border-b-2 border-white pb-1">
-              Rang Virangi
+            <span className="font-mono italic border-b-2 border-black pb-1">
+              RangVirangi
             </span>
           </Link>
         </div>
@@ -75,19 +44,19 @@ export function Navbar() {
         <div className="hidden lg:flex items-center gap-8 text-sm font-medium">
           <Link
             href="/"
-            className="hover:text-gray-300 transition-colors underline decoration-white underline-offset-4"
+            className="hover:text-gray-600 transition-colors underline decoration-black underline-offset-4"
           >
             Home
           </Link>
-          <Link href="/shop" className="hover:text-gray-300 transition-colors">
+          <Link href="/shop" className="hover:text-gray-600 transition-colors">
             Shop
           </Link>
-          <Link href="/about" className="hover:text-gray-300 transition-colors">
+          <Link href="/about" className="hover:text-gray-600 transition-colors">
             About
           </Link>
           <Link
             href="/contact"
-            className="hover:text-gray-300 transition-colors"
+            className="hover:text-gray-600 transition-colors"
           >
             Contact
           </Link>
@@ -97,20 +66,20 @@ export function Navbar() {
         <div className="flex items-center gap-4">
           <button
             aria-label="Search"
-            className="hover:text-gray-300 transition-colors"
+            className="hover:text-gray-600 transition-colors"
           >
             <Search className="w-5 h-5" />
           </button>
           <Link
             href="/account"
             aria-label="Account"
-            className="hover:text-gray-300 transition-colors"
+            className="hover:text-gray-600 transition-colors"
           >
             <User className="w-5 h-5" />
           </Link>
           <button
             aria-label="Cart"
-            className="hover:text-gray-300 transition-colors relative"
+            className="hover:text-gray-600 transition-colors relative"
             onClick={openCart}
             ref={setCartBtnRef}
           >

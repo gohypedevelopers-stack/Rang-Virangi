@@ -3,15 +3,15 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <footer className="py-15 px-4 md:px-8 bg-black border-t border-neutral-800">
+    <footer className="py-15 px-4 md:px-8 bg-white border-t border-neutral-200">
       <div className="w-full">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-10 md:mb-8">
             <Link href="/" className="flex items-center gap-2">
-              <h2 className="text-xl font-bold text-white">Rang Virangi</h2>
+              <h2 className="text-xl font-bold text-black">RangVirangi</h2>
             </Link>
 
-            <p className="text-neutral-400 mt-4 max-w-xs">
+            <p className="text-neutral-600 mt-4 max-w-xs">
               Premium streetwear collection. Redefining fashion with bold
               designs and quality craftsmanship.
             </p>
@@ -21,12 +21,12 @@ function Footer() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             <div>
-              <h3 className="font-semibold mb-4 text-white">Shop</h3>
+              <h3 className="font-semibold mb-4 text-black">Shop</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
                     href="/shop"
-                    className="text-neutral-400 hover:text-white transition-colors"
+                    className="text-neutral-600 hover:text-black transition-colors"
                   >
                     All Products
                   </Link>
@@ -34,7 +34,7 @@ function Footer() {
                 <li>
                   <Link
                     href="/shop/new"
-                    className="text-neutral-400 hover:text-white transition-colors"
+                    className="text-neutral-600 hover:text-black transition-colors"
                   >
                     New Arrivals
                   </Link>
@@ -42,7 +42,7 @@ function Footer() {
                 <li>
                   <Link
                     href="/shop/sale"
-                    className="text-neutral-400 hover:text-white transition-colors"
+                    className="text-neutral-600 hover:text-black transition-colors"
                   >
                     Sale
                   </Link>
@@ -50,7 +50,7 @@ function Footer() {
                 <li>
                   <Link
                     href="/shop/hoodies"
-                    className="text-neutral-400 hover:text-white transition-colors"
+                    className="text-neutral-600 hover:text-black transition-colors"
                   >
                     Hoodies
                   </Link>
@@ -58,7 +58,7 @@ function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-white">Company</h3>
+              <h3 className="font-semibold mb-4 text-black">Company</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
@@ -95,7 +95,7 @@ function Footer() {
               </ul>
             </div>
             <div>
-              <h3 className="font-semibold mb-4 text-white">Connect</h3>
+              <h3 className="font-semibold mb-4 text-black">Connect</h3>
               <ul className="space-y-2">
                 <li>
                   <Link
@@ -126,8 +126,8 @@ function Footer() {
           </div>
         </div>
         <div className="w-full flex mt-8 items-center justify-center">
-          <h1 className="text-center text-4xl md:text-6xl lg:text-[11.5rem] scale-y-125 overflow-hidden uppercase font-medium bg-clip-text text-white select-none tracking-wider whitespace-nowrap">
-            Rang Virangi
+          <h1 className="text-center text-4xl md:text-6xl lg:text-[11.5rem] scale-y-125 overflow-hidden uppercase font-medium bg-clip-text text-black select-none tracking-wider whitespace-nowrap">
+            RangVirangi
           </h1>
         </div>
       </div>
