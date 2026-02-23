@@ -1,16 +1,45 @@
 "use client";
 
 import Link from "next/link";
-import { Search, User, ShoppingBag } from "lucide-react";
-import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
+import { Search, User, ShoppingBag, X, Package, Settings, Heart, LogOut, Menu } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useCart } from "../context/cart-context";
+import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
+  const pathname = usePathname();
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
+  const [isMobileProfileOpen, setIsMobileProfileOpen] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const profileRef = useRef<HTMLDivElement>(null);
   const navRef = useRef(null);
   const logoRef = useRef(null);
   const { openCart, setCartBtnRef, cartItems } = useCart();
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
+        setIsProfileOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen || isMobileSearchOpen || isMobileProfileOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMobileMenuOpen, isMobileSearchOpen, isMobileProfileOpen]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -27,56 +56,137 @@ export function Navbar() {
   return (
     <nav
       ref={navRef}
-      className="fixed top-0 left-0 w-full z-50 text-black p-6 transition-all bg-white/95 backdrop-blur-md shadow-sm"
+      className="fixed top-0 left-0 w-full z-50 text-black py-6 pl-6 pr-[2px] md:p-6 transition-all bg-white/95 backdrop-blur-md shadow-sm"
     >
-      <div className="container mx-auto flex items-center justify-between">
-        {/* Logo Section */}
-        <div className="flex-shrink-0" ref={logoRef}>
-          <Link href="/" className="text-2xl font-bold tracking-tighter">
-            {/* Placeholder for the logo from the image */}
-            <span className="font-mono italic border-b-2 border-black pb-1">
-              RangVirangi
-            </span>
-          </Link>
+      <div className="mx-auto flex items-center justify-between relative w-full pr-0 md:px-4 lg:px-8">
+
+        {/* Mobile Hamburger Menu Icon */}
+        <div className="flex-1 flex lg:hidden justify-start">
+          <button
+            aria-label="Menu"
+            onClick={() => setIsMobileMenuOpen(true)}
+            className="hover:text-gray-600 transition-colors p-2 -ml-2"
+          >
+            <Menu className="w-6 h-6" />
+          </button>
         </div>
 
         {/* Navigation Links */}
-        <div className="hidden lg:flex items-center gap-8 text-sm font-medium">
+        <div className="hidden lg:flex items-center gap-8 text-sm font-medium flex-1">
           <Link
             href="/"
-            className="hover:text-gray-600 transition-colors underline decoration-black underline-offset-4"
+            className={`hover:text-gray-600 transition-colors ${pathname === "/" ? "underline decoration-black underline-offset-4" : ""}`}
           >
             Home
           </Link>
-          <Link href="/shop" className="hover:text-gray-600 transition-colors">
+          <Link href="/shop" className={`hover:text-gray-600 transition-colors ${pathname.startsWith("/shop") ? "underline decoration-black underline-offset-4" : ""}`}>
             Shop
           </Link>
-          <Link href="/about" className="hover:text-gray-600 transition-colors">
+          <Link href="/about" className={`hover:text-gray-600 transition-colors ${pathname.startsWith("/about") ? "underline decoration-black underline-offset-4" : ""}`}>
             About
           </Link>
           <Link
             href="/contact"
-            className="hover:text-gray-600 transition-colors"
+            className={`hover:text-gray-600 transition-colors ${pathname.startsWith("/contact") ? "underline decoration-black underline-offset-4" : ""}`}
           >
             Contact
           </Link>
         </div>
 
+        {/* Logo Section */}
+        <div className="flex-shrink-0 flex-1 lg:flex-none flex justify-start lg:absolute lg:left-1/2 lg:-translate-x-1/2" ref={logoRef}>
+          <Link href="/" className="font-black italic tracking-tighter">
+            <div className="flex flex-row md:flex-col items-start gap-[6px] md:gap-[2px] leading-none">
+              <span className="border-b-[3px] border-black pb-0.5 text-xl md:text-[22px]">RANG VIRANGI</span>
+              <span className="border-b-[3px] border-black pb-0.5 text-xl md:text-[22px]"></span>
+            </div>
+          </Link>
+        </div>
+
         {/* Icons Section */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-[2px] md:gap-2 flex-1 justify-end relative">
+          {/* Animated Search Input */}
+          <div
+            className={`hidden md:flex items-center border-b border-black overflow-hidden transition-all duration-300 ease-in-out ${isSearchOpen ? "w-48 opacity-100" : "w-0 opacity-0 pointer-events-none"
+              }`}
+          >
+            <input
+              ref={searchInputRef}
+              type="text"
+              placeholder="Search..."
+              className="bg-transparent outline-none w-full text-sm py-1 px-2"
+              onBlur={() => {
+                // Short delay to allow clicking the search icon itself to toggle
+                setTimeout(() => setIsSearchOpen(false), 200);
+              }}
+            />
+          </div>
+
           <button
             aria-label="Search"
-            className="hover:text-gray-600 transition-colors"
+            className="hover:text-gray-600 transition-colors p-2"
+            onClick={() => {
+              if (window.innerWidth < 768) {
+                setIsMobileSearchOpen(!isMobileSearchOpen);
+              } else {
+                setIsSearchOpen(!isSearchOpen);
+                if (!isSearchOpen) {
+                  setTimeout(() => searchInputRef.current?.focus(), 100);
+                }
+              }
+            }}
           >
-            <Search className="w-5 h-5" />
+            {isSearchOpen || isMobileSearchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
           </button>
-          <Link
-            href="/account"
-            aria-label="Account"
-            className="hover:text-gray-600 transition-colors"
-          >
-            <User className="w-5 h-5" />
-          </Link>
+          <div className="relative" ref={profileRef}>
+            <button
+              aria-label="Account"
+              className="hover:text-gray-600 transition-colors p-2"
+              onClick={() => {
+                if (window.innerWidth < 768) {
+                  setIsMobileProfileOpen(!isMobileProfileOpen);
+                } else {
+                  setIsProfileOpen(!isProfileOpen);
+                }
+              }}
+            >
+              <User className="w-5 h-5" />
+            </button>
+
+            <AnimatePresence>
+              {isProfileOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.2 }}
+                  className="hidden md:flex absolute right-0 top-full mt-2 w-64 bg-white border border-neutral-200 shadow-xl rounded-2xl overflow-hidden z-50 flex-col"
+                >
+                  <div className="p-4 border-b border-neutral-100 bg-neutral-50/50">
+                    <p className="text-xl font-black tracking-tight">Hi, User</p>
+                  </div>
+
+                  <div className="p-2 flex flex-col gap-1">
+                    <Link href="/account/orders" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-neutral-600 hover:text-black hover:bg-neutral-50 rounded-lg transition-all">
+                      <Package className="w-4 h-4" /> My Orders
+                    </Link>
+                    <Link href="/account/settings" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-neutral-600 hover:text-black hover:bg-neutral-50 rounded-lg transition-all">
+                      <Settings className="w-4 h-4" /> Profile Settings
+                    </Link>
+                    <Link href="/account/wishlist" onClick={() => setIsProfileOpen(false)} className="flex items-center gap-3 px-4 py-2.5 text-sm font-bold text-neutral-600 hover:text-black hover:bg-neutral-50 rounded-lg transition-all">
+                      <Heart className="w-4 h-4" /> Wishlist
+                    </Link>
+                  </div>
+
+                  <div className="p-2 border-t border-neutral-100">
+                    <button onClick={() => setIsProfileOpen(false)} className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-bold text-red-600 hover:bg-red-50 rounded-lg transition-all">
+                      Sign Out <LogOut className="w-4 h-4" />
+                    </button>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
           <button
             aria-label="Cart"
             className="hover:text-gray-600 transition-colors relative"
@@ -92,6 +202,130 @@ export function Navbar() {
           </button>
         </div>
       </div>
+
+      {/* Mobile Full-Screen Menu Drawer */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "-100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "-100%" }}
+            transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
+            className="fixed inset-0 z-[100] bg-white h-screen w-screen flex flex-col overflow-hidden"
+          >
+            {/* Mobile Menu Header */}
+            <div className="relative flex items-center justify-between p-6 border-b border-neutral-100 min-h-[80px] bg-white">
+              {/* Left Spacer to balance the Close Button */}
+              <div className="w-10"></div>
+
+              <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="absolute left-1/2 -translate-x-1/2 font-black italic tracking-tighter">
+                <div className="flex flex-row items-center gap-[6px] leading-none">
+                  <span className="border-b-[3px] border-black pb-0.5 text-xl">RANG VIRANGI</span>
+                  <span className="border-b-[3px] border-black pb-0.5 text-xl"></span>
+                </div>
+              </Link>
+
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="p-2 hover:bg-neutral-100 rounded-full transition-colors -mr-2 z-10"
+                aria-label="Close menu"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+
+            {/* Mobile Navigation Links */}
+            <div className="flex-1 px-6 py-6 flex flex-col items-start justify-start bg-white">
+              <div className="flex flex-col w-full text-left">
+                {[
+                  { name: "Home", href: "/" },
+                  { name: "Shop", href: "/shop" },
+                  { name: "About", href: "/about" },
+                  { name: "Contact", href: "/contact" },
+                ].map((link, i) => (
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 + (i * 0.05), duration: 0.4 }}
+                    className="w-full border-b border-neutral-100 last:border-none"
+                  >
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="py-6 flex items-center justify-between text-2xl md:text-3xl font-black uppercase tracking-tight hover:text-neutral-500 transition-colors group"
+                    >
+                      <span>{link.name}</span>
+                      <span className="text-neutral-300 group-hover:text-black transition-colors group-hover:translate-x-1 duration-300">→</span>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      {/* Mobile Search Sidebar */}
+      <AnimatePresence>
+        {isMobileSearchOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "tween", duration: 0.3 }}
+            className="fixed inset-0 z-[120] w-screen h-screen bg-white md:hidden flex flex-col overflow-hidden"
+          >
+            <div className="flex items-center justify-between p-6 border-b border-neutral-100 min-h-[80px]">
+              <span className="text-xl font-bold tracking-tight">Search</span>
+              <button onClick={() => setIsMobileSearchOpen(false)} className="p-2 hover:bg-neutral-100 rounded-full transition-colors -mr-2">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="p-6">
+              <div className="flex items-center border-b-2 border-black pb-3">
+                <Search className="w-6 h-6 mr-3 text-neutral-500" />
+                <input type="text" placeholder="Search products..." className="w-full text-xl outline-none bg-transparent" autoFocus />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Mobile Profile Sidebar */}
+      <AnimatePresence>
+        {isMobileProfileOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "tween", duration: 0.3 }}
+            className="fixed inset-0 z-[120] w-screen h-screen bg-white md:hidden flex flex-col overflow-hidden"
+          >
+            <div className="flex items-center justify-between p-6 border-b border-neutral-100 min-h-[80px] bg-neutral-50/50">
+              <p className="text-xl md:text-2xl font-black tracking-tight">Hi, User</p>
+              <button onClick={() => setIsMobileProfileOpen(false)} className="p-2 hover:bg-neutral-200 rounded-full transition-colors -mr-2">
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <div className="flex-1 overflow-y-auto px-6 py-6 flex flex-col gap-4 bg-white">
+              <Link href="/account/orders" onClick={() => setIsMobileProfileOpen(false)} className="flex items-center gap-4 px-4 py-5 text-xl font-bold text-neutral-700 hover:bg-neutral-100 rounded-xl transition-all">
+                <Package className="w-6 h-6" /> My Orders
+              </Link>
+              <Link href="/account/settings" onClick={() => setIsMobileProfileOpen(false)} className="flex items-center gap-4 px-4 py-5 text-xl font-bold text-neutral-700 hover:bg-neutral-100 rounded-xl transition-all">
+                <Settings className="w-6 h-6" /> Profile Settings
+              </Link>
+              <Link href="/account/wishlist" onClick={() => setIsMobileProfileOpen(false)} className="flex items-center gap-4 px-4 py-5 text-xl font-bold text-neutral-700 hover:bg-neutral-100 rounded-xl transition-all">
+                <Heart className="w-6 h-6" /> Wishlist
+              </Link>
+            </div>
+            <div className="p-6 border-t border-neutral-100 mt-auto bg-white">
+              <button onClick={() => setIsMobileProfileOpen(false)} className="w-full flex items-center justify-between px-6 py-5 text-xl font-bold text-red-600 bg-red-50 hover:bg-red-100 rounded-xl transition-all">
+                Sign Out <LogOut className="w-6 h-6" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

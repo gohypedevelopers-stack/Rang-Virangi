@@ -19,13 +19,13 @@ export function VideoBanner() {
       </div>
 
       {/* Video Container */}
-      <div className="relative w-full aspect-video md:aspect-[21/9] overflow-hidden">
+      <div className="relative w-full bg-black overflow-hidden flex items-center justify-center">
         <video
           autoPlay
           loop
           muted
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+          className="w-full h-auto object-cover md:aspect-[21/9]"
         >
           <source src="/video.mp4" type="video/mp4" />
           Your browser does not support the video tag.

@@ -63,7 +63,7 @@ function Footer() {
                 <li>
                   <Link
                     href="/about"
-                    className="text-neutral-400 hover:text-white transition-colors"
+                    className="text-neutral-600 hover:text-black transition-colors"
                   >
                     About Us
                   </Link>
@@ -71,7 +71,7 @@ function Footer() {
                 <li>
                   <Link
                     href="/contact"
-                    className="text-neutral-400 hover:text-white transition-colors"
+                    className="text-neutral-600 hover:text-black transition-colors"
                   >
                     Contact
                   </Link>
@@ -79,7 +79,7 @@ function Footer() {
                 <li>
                   <Link
                     href="/shipping"
-                    className="text-neutral-400 hover:text-white transition-colors"
+                    className="text-neutral-600 hover:text-black transition-colors"
                   >
                     Shipping
                   </Link>
@@ -87,7 +87,7 @@ function Footer() {
                 <li>
                   <Link
                     href="/returns"
-                    className="text-neutral-400 hover:text-white transition-colors"
+                    className="text-neutral-600 hover:text-black transition-colors"
                   >
                     Returns
                   </Link>
@@ -100,7 +100,7 @@ function Footer() {
                 <li>
                   <Link
                     href="https://instagram.com"
-                    className="text-neutral-400 hover:text-white transition-colors"
+                    className="text-neutral-600 hover:text-black transition-colors"
                   >
                     Instagram
                   </Link>
@@ -108,7 +108,7 @@ function Footer() {
                 <li>
                   <Link
                     href="https://twitter.com"
-                    className="text-neutral-400 hover:text-white transition-colors"
+                    className="text-neutral-600 hover:text-black transition-colors"
                   >
                     Twitter
                   </Link>
@@ -116,7 +116,7 @@ function Footer() {
                 <li>
                   <Link
                     href="https://facebook.com"
-                    className="text-neutral-400 hover:text-white transition-colors"
+                    className="text-neutral-600 hover:text-black transition-colors"
                   >
                     Facebook
                   </Link>

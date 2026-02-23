@@ -12,13 +12,6 @@ const shapes = [
     top: "20%",
     left: "80%",
   },
-  {
-    type: "square",
-    color: "bg-black",
-    size: "w-20 h-20",
-    top: "40%",
-    left: "50%",
-  },
 ];
 
 export function FloatingShapes({ className }: { className?: string }) {
@@ -84,11 +77,11 @@ export function FloatingShapes({ className }: { className?: string }) {
           className={cn(
             "absolute opacity-60 backdrop-blur-3xl",
             shape.type === "circle" &&
-              `rounded-full ${shape.color} ${shape.size}`,
+            `rounded-full ${shape.color} ${shape.size}`,
             shape.type === "square" &&
-              `rounded-xl ${shape.color} ${shape.size} rotate-12`,
+            `rounded-xl ${shape.color} ${shape.size} rotate-12`,
             shape.type === "triangle" &&
-              `w-0 h-0 border-l-[30px] border-r-[30px] border-b-[50px] border-l-transparent border-r-transparent ${shape.color} rotate-45`,
+            `w-0 h-0 border-l-[30px] border-r-[30px] border-b-[50px] border-l-transparent border-r-transparent ${shape.color} rotate-45`,
           )}
           style={{ top: shape.top, left: shape.left }}
         />
