@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Search, User, ShoppingBag, X, Package, Settings, Heart, LogOut, Menu } from "lucide-react";
+import { Search, User, ShoppingBag, X, Package, Settings, Heart, LogOut, Menu, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -16,6 +16,7 @@ export function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isMobileProfileOpen, setIsMobileProfileOpen] = useState(false);
+  const [isMobileCategoriesOpen, setIsMobileCategoriesOpen] = useState(false);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const navRef = useRef(null);
@@ -72,7 +73,7 @@ export function Navbar() {
         </div>
 
         {/* Navigation Links */}
-        <div className="hidden lg:flex items-center gap-8 text-sm font-medium flex-1">
+        <div className="hidden lg:flex items-center gap-8 text-[17px] font-bold flex-1">
           <Link
             href="/"
             className={`hover:text-gray-600 transition-colors ${pathname === "/" ? "underline decoration-black underline-offset-4" : ""}`}
@@ -96,8 +97,8 @@ export function Navbar() {
         {/* Logo Section */}
         <div className="flex-shrink-0 flex-1 lg:flex-none flex justify-start lg:absolute lg:left-1/2 lg:-translate-x-1/2" ref={logoRef}>
           <Link href="/" className="font-black italic tracking-tighter">
-            <div className="flex flex-row md:flex-col items-start gap-[6px] md:gap-[2px] leading-none">
-              <span className="border-b-[3px] border-black pb-0.5 text-xl md:text-[22px]">RANG VIRANGI</span>
+            <div className="flex flex-row md:flex-col items-start gap-[6px] md:gap-[2px] leading-none whitespace-nowrap">
+              <span className="border-b-[3px] border-black pb-0.5 text-xl md:text-[30px] font-caesar tracking-normal not-italic whitespace-nowrap">RANG VIRANGI</span>
               <span className="border-b-[3px] border-black pb-0.5 text-xl md:text-[22px]"></span>
             </div>
           </Link>
@@ -136,7 +137,7 @@ export function Navbar() {
               }
             }}
           >
-            {isSearchOpen || isMobileSearchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
+            {isSearchOpen || isMobileSearchOpen ? <X className="W-8 H-8" /> : <Search className="W-8 H-8" />}
           </button>
           <div className="relative" ref={profileRef}>
             <button
@@ -150,7 +151,7 @@ export function Navbar() {
                 }
               }}
             >
-              <User className="w-5 h-5" />
+              <User className="W-8 H-8" />
             </button>
 
             <AnimatePresence>
@@ -193,7 +194,7 @@ export function Navbar() {
             onClick={openCart}
             ref={setCartBtnRef}
           >
-            <ShoppingBag className="w-5 h-5" />
+            <ShoppingBag className="W-8 H-8" />
             {cartItems.length > 0 && (
               <span className="absolute -top-2 -right-2 bg-white text-black text-[10px] font-bold h-4 w-4 rounded-full flex items-center justify-center">
                 {cartItems.length}
@@ -219,8 +220,8 @@ export function Navbar() {
               <div className="w-10"></div>
 
               <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="absolute left-1/2 -translate-x-1/2 font-black italic tracking-tighter">
-                <div className="flex flex-row items-center gap-[6px] leading-none">
-                  <span className="border-b-[3px] border-black pb-0.5 text-xl">RANG VIRANGI</span>
+                <div className="flex flex-row items-center gap-[6px] leading-none whitespace-nowrap">
+                  <span className="border-b-[3px] border-black pb-0.5 text-xl font-caesar tracking-normal not-italic whitespace-nowrap">RANG VIRANGI</span>
                   <span className="border-b-[3px] border-black pb-0.5 text-xl"></span>
                 </div>
               </Link>
@@ -235,13 +236,11 @@ export function Navbar() {
             </div>
 
             {/* Mobile Navigation Links */}
-            <div className="flex-1 px-6 py-6 flex flex-col items-start justify-start bg-white">
+            <div className="flex-1 overflow-y-auto px-6 py-6 flex flex-col items-start justify-start bg-white">
               <div className="flex flex-col w-full text-left">
                 {[
                   { name: "Home", href: "/" },
                   { name: "Shop", href: "/shop" },
-                  { name: "About", href: "/about" },
-                  { name: "Contact", href: "/contact" },
                 ].map((link, i) => (
                   <motion.div
                     key={link.name}
@@ -260,6 +259,51 @@ export function Navbar() {
                     </Link>
                   </motion.div>
                 ))}
+
+                {/* Categories Dropdown */}
+                <motion.div
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.2, duration: 0.4 }}
+                  className="w-full border-b border-neutral-100 last:border-none"
+                >
+                  <button
+                    onClick={() => setIsMobileCategoriesOpen(!isMobileCategoriesOpen)}
+                    className="w-full py-6 flex items-center justify-between text-2xl md:text-3xl font-black uppercase tracking-tight hover:text-neutral-500 transition-colors group"
+                  >
+                    <span>Categories</span>
+                    <span className="text-neutral-300 group-hover:text-black transition-colors duration-300">
+                      <ChevronDown className={`w-8 h-8 transition-transform duration-300 ${isMobileCategoriesOpen ? "rotate-180" : ""}`} />
+                    </span>
+                  </button>
+
+                  <AnimatePresence>
+                    {isMobileCategoriesOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden"
+                      >
+                        <div className="flex flex-col gap-4 pb-6 px-4">
+                          {["All", "Tees", "Bottoms", "Hoodies", "Outerwear"].map(cat => (
+                            <Link
+                              key={cat}
+                              href={`/shop?category=${cat}`}
+                              onClick={() => {
+                                setIsMobileMenuOpen(false);
+                                setIsMobileCategoriesOpen(false);
+                              }}
+                              className="text-lg font-bold text-neutral-600 hover:text-black uppercase tracking-wider py-2 transition-colors border-b border-neutral-50 last:border-none"
+                            >
+                              {cat}
+                            </Link>
+                          ))}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
               </div>
             </div>
           </motion.div>

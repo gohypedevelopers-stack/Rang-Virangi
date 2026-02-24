@@ -30,7 +30,7 @@ export default function AboutPage() {
                     </p>
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 uppercase leading-tight">
                         We Are <br />
-                        <span className="italic font-MONO border-b-[6px] border-black pb-1 inline-block mt-2 bg-gradient-to-r from-slate-600 via-neutral-300 to-zinc-700 bg-clip-text text-transparent">
+                        <span className="font-caesar font-normal tracking-normal border-b-[6px] border-black pb-1 inline-block mt-2 bg-gradient-to-r from-slate-600 via-neutral-300 to-zinc-700 bg-clip-text text-transparent">
                             Rang Virangi
                         </span>
                     </h1>

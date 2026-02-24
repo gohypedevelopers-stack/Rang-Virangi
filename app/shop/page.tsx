@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -9,18 +9,14 @@ import {
     Filter,
     ChevronDown,
     X,
-    SlidersHorizontal
+    SlidersHorizontal,
+    ShoppingCart
 } from "lucide-react";
+import { useCart } from "@/context/cart-context";
+import { products } from "@/lib/products";
+import { ProductCard } from "@/components/product-card";
 
 // --- Mock Data ---
-const PRODUCTS = [
-    { id: "rv-1001", name: "The Essential Bamboo Oversized Tee", brand: "RANG VIRANGI", price: 1899, compareAtPrice: 2499, category: "Tees", color: "Onyx Black", isNew: true, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=800&auto=format&fit=crop", hoverImage: "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?q=80&w=800&auto=format&fit=crop" },
-    { id: "rv-1002", name: "Heavyweight Cargo Pants", brand: "RANG VIRANGI", price: 3499, compareAtPrice: null, category: "Bottoms", color: "Olive", isNew: false, image: "https://images.unsplash.com/photo-1624378439575-d1ead6eba2a2?q=80&w=800&auto=format&fit=crop", hoverImage: "https://images.unsplash.com/photo-1624378439575-d1ead6eba2a2?q=80&w=800&auto=format&fit=crop" },
-    { id: "rv-1003", name: "Premium French Terry Hoodie", brand: "RANG VIRANGI", price: 3899, compareAtPrice: 4500, category: "Hoodies", color: "Ash Gray", isNew: false, image: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&auto=format&fit=crop", hoverImage: "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=800&auto=format&fit=crop" },
-    { id: "rv-1004", name: "Textured Shacket", brand: "RANG VIRANGI", price: 4299, compareAtPrice: null, category: "Outerwear", color: "Navy", isNew: true, image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop", hoverImage: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop" },
-    { id: "rv-1005", name: "Knitted Vintage Polo", brand: "RANG VIRANGI", price: 2199, compareAtPrice: 2899, category: "Tees", color: "Cream", isNew: false, image: "https://images.unsplash.com/photo-1626497764746-6dc36addedce?q=80&w=800&auto=format&fit=crop", hoverImage: "https://images.unsplash.com/photo-1626497764746-6dc36addedce?q=80&w=800&auto=format&fit=crop" },
-    { id: "rv-1006", name: "Everyday Relaxed Chino", brand: "RANG VIRANGI", price: 2899, compareAtPrice: null, category: "Bottoms", color: "Beige", isNew: false, image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=800&auto=format&fit=crop", hoverImage: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=800&auto=format&fit=crop" },
-];
 
 const CATEGORIES = ["All", "Tees", "Bottoms", "Hoodies", "Outerwear"];
 const SIZES = ["S", "M", "L", "XL", "XXL"];
@@ -33,13 +29,42 @@ const COLORS = [
     { name: "Beige", value: "#d4c8b8" },
 ];
 
-const SORT_OPTIONS = ["Featured", "New Arrivals", "Price: Low to High", "Price: High to Low"];
+const SORT_OPTIONS = ["Sale", "Featured", "New Arrivals", "Price: Low to High", "Price: High to Low",];
 
 export default function ShopPage() {
     const [activeCategory, setActiveCategory] = useState("All");
     const [activeSizes, setActiveSizes] = useState<string[]>([]);
     const [activeColors, setActiveColors] = useState<string[]>([]);
     const [sortBy, setSortBy] = useState("Featured");
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const searchParams = new URLSearchParams(window.location.search);
+            const sortParam = searchParams.get("sort");
+            if (sortParam === "new-arrivals") {
+                setSortBy("New Arrivals");
+            } else if (sortParam === "sale" || sortParam === "Sale") {
+                setSortBy("Sale");
+            }
+        }
+    }, []);
+
+    const { addToCart } = useCart();
+
+    const handleAddToCart = (
+        e: React.MouseEvent,
+        product: (typeof products)[0],
+    ) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const card = (e.currentTarget as HTMLElement).closest(".group");
+        const img = card?.querySelector("img");
+
+        if (img) {
+            addToCart(product, img as HTMLImageElement);
+        }
+    };
 
     const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
     const [isSortDropdownOpen, setIsSortDropdownOpen] = useState(false);
@@ -64,14 +89,11 @@ export default function ShopPage() {
     };
 
     const getFilteredProducts = () => {
-        let filtered = [...PRODUCTS];
-        if (activeCategory !== "All") {
-            filtered = filtered.filter(p => p.category === activeCategory);
-        }
-        // Simplistic size/color filtering (mock implementation)
-        // In reality, this would check product variants.
-        if (activeColors.length > 0) {
-            filtered = filtered.filter(p => activeColors.includes(p.color));
+        let filtered = [...products];
+
+        // Handle 'Sale' as a filter/sort combo
+        if (sortBy === "Sale") {
+            filtered = filtered.filter(p => p.isSale);
         }
 
         // Sort
@@ -80,7 +102,7 @@ export default function ShopPage() {
         } else if (sortBy === "Price: High to Low") {
             filtered.sort((a, b) => b.price - a.price);
         } else if (sortBy === "New Arrivals") {
-            filtered.sort((a, b) => (a.isNew === b.isNew ? 0 : a.isNew ? -1 : 1));
+            filtered.sort((a, b) => b.id - a.id);
         }
 
         return filtered;
@@ -152,12 +174,9 @@ export default function ShopPage() {
             <div className="container mx-auto px-4 md:px-8 mb-10">
                 <nav className="flex items-center gap-3 text-xs md:text-sm text-neutral-500 font-medium mb-6 whitespace-nowrap overflow-x-auto scrollbar-hide pb-1">
                     <Link href="/" className="hover:text-black transition-colors shrink-0">Home</Link>
-                    <ChevronRight className="w-3 h-3 text-neutral-300 shrink-0" />
+                    <ChevronRight className="w-3 h-3 text-neutral-700 shrink-0" />
                     <Link href="/shop" className="text-black font-bold transition-colors shrink-0">Shop</Link>
-                    <ChevronRight className="w-3 h-3 text-neutral-300 shrink-0" />
-                    <Link href="/about" className="hover:text-black transition-colors shrink-0">About</Link>
-                    <ChevronRight className="w-3 h-3 text-neutral-300 shrink-0" />
-                    <Link href="/contact" className="hover:text-black transition-colors shrink-0">Contact</Link>
+
                 </nav>
 
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-neutral-200">
@@ -253,64 +272,18 @@ export default function ShopPage() {
                                         transition={{ duration: 0.3 }}
                                         key={product.id}
                                     >
-                                        <Link href={`/product/${product.id}`} className="group block">
-                                            {/* Image Container */}
-                                            <div className="relative aspect-[3/4] bg-neutral-100 rounded-2xl overflow-hidden mb-4 border border-transparent group-hover:border-neutral-200 transition-all">
-                                                {/* Primary Image */}
-                                                <Image
-                                                    src={product.image}
-                                                    alt={product.name}
-                                                    fill
-                                                    className="object-cover transition-opacity duration-700 group-hover:opacity-0"
-                                                />
-                                                {/* Hover Image */}
-                                                <Image
-                                                    src={product.hoverImage}
-                                                    alt={`${product.name} Hover`}
-                                                    fill
-                                                    className="object-cover absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100 group-hover:scale-105"
-                                                />
-
-                                                {/* Badges */}
-                                                <div className="absolute top-3 left-3 flex flex-col gap-2">
-                                                    {product.isNew && (
-                                                        <span className="bg-black text-white text-[10px] md:text-xs font-bold uppercase tracking-wider py-1 px-2.5 rounded-full">
-                                                            New Drop
-                                                        </span>
-                                                    )}
-                                                    {product.compareAtPrice && (
-                                                        <span className="bg-red-600 text-white text-[10px] md:text-xs font-bold uppercase tracking-wider py-1 px-2.5 rounded-full">
-                                                            Sale
-                                                        </span>
-                                                    )}
-                                                </div>
-
-                                                {/* Quick Add (Desktop Hover) */}
-                                                <div className="absolute bottom-4 inset-x-4 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-300 hidden md:block">
-                                                    <button className="w-full bg-white/90 backdrop-blur text-black font-bold uppercase tracking-widest text-xs py-3 rounded-full hover:bg-black hover:text-white transition-colors shadow-lg">
-                                                        Quick View
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            {/* Info */}
-                                            <div>
-                                                {/* Color Swatch Preview */}
-                                                <div className="flex items-center gap-1 mb-2">
-                                                    <div className="w-3 h-3 rounded-full border border-neutral-300" style={{ backgroundColor: COLORS.find(c => c.name === product.color)?.value || "#000" }} />
-                                                    <span className="text-[10px] uppercase tracking-wider text-neutral-500 font-bold">{product.color}</span>
-                                                </div>
-
-                                                <h3 className="font-bold text-sm md:text-base tracking-tight mb-1 group-hover:underline decoration-2 underline-offset-4">{product.name}</h3>
-
-                                                <div className="flex items-center gap-2">
-                                                    <span className="font-medium text-sm md:text-base">₹{product.price}</span>
-                                                    {product.compareAtPrice && (
-                                                        <span className="text-xs md:text-sm text-neutral-400 font-bold line-through">₹{product.compareAtPrice}</span>
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </Link>
+                                        <ProductCard
+                                            product={product}
+                                            imageOverlay={
+                                                <button
+                                                    onClick={(e) => handleAddToCart(e, product)}
+                                                    className="bg-black text-white p-3 rounded-full hover:bg-neutral-800 transition-all shadow-lg hidden md:block"
+                                                    aria-label="Add to cart"
+                                                >
+                                                    <ShoppingCart className="w-5 h-5" />
+                                                </button>
+                                            }
+                                        />
                                     </motion.div>
                                 ))}
                             </AnimatePresence>

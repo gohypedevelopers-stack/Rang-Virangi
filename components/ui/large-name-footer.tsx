@@ -8,7 +8,7 @@ function Footer() {
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-10 md:mb-8">
             <Link href="/" className="flex items-center gap-2">
-              <h2 className="text-xl font-bold text-black">RangVirangi</h2>
+              <h2 className="text-xl font-bold text-black font-caesar">Rang Virangi</h2>
             </Link>
 
             <p className="text-neutral-600 mt-4 max-w-xs">
@@ -33,7 +33,7 @@ function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/shop/new"
+                    href="/shop?sort=new-arrivals"
                     className="text-neutral-600 hover:text-black transition-colors"
                   >
                     New Arrivals
@@ -41,7 +41,7 @@ function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/shop/sale"
+                    href="/shop?sort=sale"
                     className="text-neutral-600 hover:text-black transition-colors"
                   >
                     Sale
@@ -126,8 +126,8 @@ function Footer() {
           </div>
         </div>
         <div className="w-full flex mt-8 items-center justify-center">
-          <h1 className="text-center text-4xl md:text-6xl lg:text-[11.5rem] scale-y-125 overflow-hidden uppercase font-medium bg-clip-text text-black select-none tracking-wider whitespace-nowrap">
-            RangVirangi
+          <h1 className="text-center text-4xl md:text-6xl lg:text-[11.5rem] scale-y-125 overflow-hidden font-caesar uppercase bg-clip-text text-black select-none tracking-normal whitespace-nowrap">
+            Rang Virangi
           </h1>
         </div>
       </div>

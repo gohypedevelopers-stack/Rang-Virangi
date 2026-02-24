@@ -2,20 +2,19 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Heart, X } from "lucide-react";
+import { Heart, X, ShoppingCart } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
+import { products } from "@/lib/products";
+import { ProductCard } from "@/components/product-card";
 
 // Mock Data
-const INITIAL_WISHLIST = [
-    { id: "rv-1004", name: "Textured Shacket", price: 4299, image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?q=80&w=800&auto=format&fit=crop" },
-    { id: "rv-1006", name: "Everyday Relaxed Chino", price: 2899, image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?q=80&w=800&auto=format&fit=crop" },
-];
+const INITIAL_WISHLIST = [products[3], products[5]];
 
 export default function WishlistPage() {
     const [wishlist, setWishlist] = useState(INITIAL_WISHLIST);
 
-    const handleRemove = (id: string, name: string) => {
+    const handleRemove = (id: number, name: string) => {
         setWishlist(wishlist.filter(item => item.id !== id));
         toast.success(`${name} removed from wishlist`);
     };
@@ -49,38 +48,46 @@ export default function WishlistPage() {
             ) : (
                 <div className="grid grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-12">
                     {wishlist.map((product) => (
-                        <div key={product.id} className="group relative block">
-                            {/* Image Container */}
-                            <Link href={`/product/${product.id}`} className="block relative aspect-[3/4] bg-neutral-100 rounded-2xl overflow-hidden mb-4 border border-transparent group-hover:border-neutral-200 transition-all">
-                                <Image
-                                    src={product.image}
-                                    alt={product.name}
-                                    fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
-                            </Link>
-
-                            {/* Remove Button */}
-                            <button
-                                onClick={() => handleRemove(product.id, product.name)}
-                                className="absolute top-3 right-3 p-2 bg-white/90 backdrop-blur-md rounded-full shadow-sm text-neutral-500 hover:text-red-500 hover:scale-110 transition-all z-10"
-                                aria-label="Remove from wishlist"
-                            >
-                                <X className="w-4 h-4" />
-                            </button>
-
-                            {/* Info */}
-                            <div className="text-center">
-                                <h3 className="font-bold text-sm md:text-base tracking-tight mb-1 group-hover:underline decoration-2 underline-offset-4 line-clamp-1">{product.name}</h3>
-                                <p className="font-medium text-sm md:text-base mb-4">₹{product.price}</p>
-
-                                <button
-                                    onClick={() => handleAddToCart(product.name)}
-                                    className="w-full bg-white border-2 border-black text-black font-bold uppercase tracking-widest text-[10px] md:text-xs py-2.5 rounded-xl hover:bg-black hover:text-white transition-colors"
-                                >
-                                    Quick Add
-                                </button>
-                            </div>
+                        <div key={product.id}>
+                            <ProductCard
+                                product={product}
+                                centeredText={true}
+                                topRightAction={
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleRemove(product.id, product.name);
+                                        }}
+                                        className="p-2 bg-white/90 backdrop-blur-md rounded-full shadow-sm text-neutral-500 hover:text-red-500 hover:scale-110 transition-all"
+                                        aria-label="Remove from wishlist"
+                                    >
+                                        <X className="w-4 h-4" />
+                                    </button>
+                                }
+                                imageOverlay={
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleAddToCart(product.name);
+                                        }}
+                                        className="bg-black text-white p-3 rounded-full hover:bg-neutral-800 transition-all shadow-lg hidden md:block"
+                                        aria-label="Add to cart"
+                                    >
+                                        <ShoppingCart className="w-5 h-5" />
+                                    </button>
+                                }
+                                footerAction={
+                                    <button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            handleAddToCart(product.name);
+                                        }}
+                                        className="w-full mt-4 bg-white border-2 border-black text-black font-bold uppercase tracking-widest text-[10px] md:text-xs py-2.5 rounded-xl hover:bg-black hover:text-white transition-colors"
+                                    >
+                                        Quick Add
+                                    </button>
+                                }
+                            />
                         </div>
                     ))}
                 </div>
