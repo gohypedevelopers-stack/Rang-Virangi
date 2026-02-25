@@ -1,5 +1,5 @@
 import { Hero } from "../components/hero";
-import { Categories } from "../components/categories";
+
 import { NewArrivals } from "../components/new-arrivals";
 import { VideoBanner } from "../components/video-banner";
 
@@ -26,9 +26,7 @@ export default function Home() {
         />
       </div>
 
-      <ScrollReveal animation="fade-up" delay={0.2} className="relative z-10">
-        <Categories />
-      </ScrollReveal>
+
 
       <div className="py-4 bg-white rotate-1 border-y-2 border-black z-10 relative my-8">
         <TextMarquee

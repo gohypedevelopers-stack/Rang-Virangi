@@ -7,6 +7,8 @@ export type Product = {
   image: string;
   isSale: boolean;
   inStock?: boolean;
+  brand?: string;
+  tagline?: string;
 };
 
 export const products: Product[] = [
