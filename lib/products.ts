@@ -6,6 +6,7 @@ export type Product = {
   originalPrice: number | null;
   image: string;
   isSale: boolean;
+  inStock?: boolean;
 };
 
 export const products: Product[] = [
@@ -18,6 +19,7 @@ export const products: Product[] = [
     image:
       "https://images.unsplash.com/photo-1579572331145-5e53b299c64e?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8aG9vZGllfGVufDB8fDB8fHww",
     isSale: false,
+    inStock: false,
   },
   {
     id: 2,
@@ -48,6 +50,7 @@ export const products: Product[] = [
     image:
       "https://images.unsplash.com/photo-1556821840-3a63f95609a7?q=80&w=600&auto=format&fit=crop",
     isSale: true,
+    inStock: false,
   },
   {
     id: 5,

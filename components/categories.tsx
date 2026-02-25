@@ -6,35 +6,35 @@ const categories = [
     name: "WINTER WEAR",
     href: "/shop/winter-wear",
     icon: (
-      <Image src="/jacket.png" alt="Winter Wear" width={64} height={64} className="w-16 h-16 object-contain transition-all duration-500 group-hover:brightness-0 group-hover:invert" />
+      <Image src="/jacket.png" alt="Winter Wear" width={64} height={64} className="w-18 h-18 object-contain transition-all duration-500 group-hover:brightness-0 group-hover:invert" />
     ),
   },
   {
     name: "BOTTOM WEAR",
     href: "/shop/bottom-wear",
     icon: (
-      <Image src="/bottom-wear.png" alt="Bottom Wear" width={64} height={64} className="w-16 h-16 object-contain transition-all duration-500 group-hover:brightness-0 group-hover:invert" />
+      <Image src="/bottom-wear.png" alt="Bottom Wear" width={64} height={64} className="w-18 h-18 object-contain transition-all duration-500 group-hover:brightness-0 group-hover:invert" />
     ),
   },
   {
     name: "OVERSIZED TEES",
     href: "/shop/oversized-tees",
     icon: (
-      <Image src="/tshirt.png" alt="Oversized Tees" width={64} height={64} className="w-16 h-16 object-contain transition-all duration-500 group-hover:brightness-0 group-hover:invert" />
+      <Image src="/tshirt.png" alt="Oversized Tees" width={64} height={64} className="w-18 h-18 object-contain transition-all duration-500 group-hover:brightness-0 group-hover:invert" />
     ),
   },
   {
     name: "TANKS",
     href: "/shop/tanks",
     icon: (
-      <Image src="/tank.png" alt="Tanks" width={64} height={64} className="w-16 h-16 object-contain transition-all duration-500 group-hover:brightness-0 group-hover:invert" />
+      <Image src="/tank.png" alt="Tanks" width={64} height={64} className="w-20 h-20 object-contain transition-all duration-500 group-hover:brightness-0 group-hover:invert" />
     ),
   },
   {
     name: "REGULAR FIT TEES",
     href: "/shop/regular-fit-tees",
     icon: (
-      <Image src="/tshirt-outline.png" alt="Regular Fit Tees" width={64} height={64} className="w-16 h-16 object-contain transition-all duration-500 group-hover:brightness-0 group-hover:invert" />
+      <Image src="/tshirt-outline.png" alt="Regular Fit Tees" width={64} height={64} className="w-18 h-18 object-contain transition-all duration-500 group-hover:brightness-0 group-hover:invert" />
     ),
   },
 ];

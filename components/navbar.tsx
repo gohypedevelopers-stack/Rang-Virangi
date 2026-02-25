@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { products } from "@/lib/products";
+import Image from "next/image";
 import { Search, User, ShoppingBag, X, Package, Settings, Heart, LogOut, Menu, ChevronDown } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
@@ -11,17 +13,39 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isMobileProfileOpen, setIsMobileProfileOpen] = useState(false);
   const [isMobileCategoriesOpen, setIsMobileCategoriesOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
   const profileRef = useRef<HTMLDivElement>(null);
   const navRef = useRef(null);
   const logoRef = useRef(null);
   const { openCart, setCartBtnRef, cartItems } = useCart();
+
+  const searchSuggestions = products.filter(p =>
+    searchQuery.trim() && p.name.toLowerCase().includes(searchQuery.trim().toLowerCase())
+  ).slice(0, 5);
+
+  const executeSearch = (query: string) => {
+    if (query.trim()) {
+      router.push(`/search?q=${encodeURIComponent(query.trim())}`);
+      setIsSearchOpen(false);
+      setIsMobileSearchOpen(false);
+      setIsMobileMenuOpen(false);
+      setSearchQuery("");
+    }
+  };
+
+  const handleSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      executeSearch(e.currentTarget.value);
+    }
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -108,7 +132,7 @@ export function Navbar() {
         <div className="flex items-center gap-[2px] md:gap-2 flex-1 justify-end relative">
           {/* Animated Search Input */}
           <div
-            className={`hidden md:flex items-center border-b border-black overflow-hidden transition-all duration-300 ease-in-out ${isSearchOpen ? "w-48 opacity-100" : "w-0 opacity-0 pointer-events-none"
+            className={`hidden md:flex items-center border-b border-black overflow-visible transition-all duration-300 ease-in-out relative ${isSearchOpen ? "w-64 opacity-100" : "w-0 opacity-0 pointer-events-none"
               }`}
           >
             <input
@@ -116,11 +140,51 @@ export function Navbar() {
               type="text"
               placeholder="Search..."
               className="bg-transparent outline-none w-full text-sm py-1 px-2"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={handleSearch}
               onBlur={() => {
-                // Short delay to allow clicking the search icon itself to toggle
+                // Short delay to allow clicking the search icon itself or suggestions to toggle
                 setTimeout(() => setIsSearchOpen(false), 200);
               }}
             />
+            {/* Suggestions Dropdown (Desktop) */}
+            <AnimatePresence>
+              {isSearchOpen && searchSuggestions.length > 0 && (
+                <motion.div
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 5 }}
+                  className="absolute top-full left-0 right-0 mt-2 bg-white border border-neutral-200 shadow-xl rounded-lg overflow-hidden z-50 flex flex-col"
+                >
+                  {searchSuggestions.map((product) => (
+                    <Link
+                      key={product.id}
+                      href={`/product/${product.id}`}
+                      onClick={() => {
+                        setIsSearchOpen(false);
+                        setSearchQuery("");
+                      }}
+                      className="flex items-center gap-3 px-4 py-3 hover:bg-neutral-50 transition-colors border-b border-neutral-100 last:border-b-0"
+                    >
+                      <div className="relative w-10 h-10 bg-neutral-100 rounded overflow-hidden shrink-0">
+                        <Image src={product.image} alt={product.name} fill className="object-cover" />
+                      </div>
+                      <div className="flex flex-col flex-1 min-w-0">
+                        <span className="text-xs font-bold text-black truncate w-full">{product.name}</span>
+                        <span className="text-[10px] text-neutral-500">₹{product.price.toLocaleString()}</span>
+                      </div>
+                    </Link>
+                  ))}
+                  <button
+                    onClick={() => executeSearch(searchQuery)}
+                    className="w-full text-center py-2 text-xs font-bold text-neutral-500 hover:text-black hover:bg-neutral-50 border-t border-neutral-100 transition-colors"
+                  >
+                    View all results
+                  </button>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <button
@@ -321,15 +385,61 @@ export function Navbar() {
           >
             <div className="flex items-center justify-between p-6 border-b border-neutral-100 min-h-[80px]">
               <span className="text-xl font-bold tracking-tight">Search</span>
-              <button onClick={() => setIsMobileSearchOpen(false)} className="p-2 hover:bg-neutral-100 rounded-full transition-colors -mr-2">
+              <button
+                onClick={() => {
+                  setIsMobileSearchOpen(false);
+                  setSearchQuery("");
+                }}
+                className="p-2 hover:bg-neutral-100 rounded-full transition-colors -mr-2"
+              >
                 <X className="w-6 h-6" />
               </button>
             </div>
-            <div className="p-6">
-              <div className="flex items-center border-b-2 border-black pb-3">
+            <div className="p-6 overflow-y-auto">
+              <div className="flex items-center border-b-2 border-black pb-3 shrink-0">
                 <Search className="w-6 h-6 mr-3 text-neutral-500" />
-                <input type="text" placeholder="Search products..." className="w-full text-xl outline-none bg-transparent" autoFocus />
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  className="w-full text-xl outline-none bg-transparent"
+                  autoFocus
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  onKeyDown={handleSearch}
+                />
               </div>
+
+              {/* Mobile Suggestions */}
+              {searchSuggestions.length > 0 && (
+                <div className="mt-6 flex flex-col gap-4">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-neutral-400">Suggestions</h4>
+                  {searchSuggestions.map((product) => (
+                    <Link
+                      key={product.id}
+                      href={`/product/${product.id}`}
+                      onClick={() => {
+                        setIsMobileSearchOpen(false);
+                        setSearchQuery("");
+                      }}
+                      className="flex items-center gap-4 transition-colors group"
+                    >
+                      <div className="relative w-16 h-20 bg-neutral-100 rounded overflow-hidden shrink-0">
+                        <Image src={product.image} alt={product.name} fill className="object-cover" />
+                      </div>
+                      <div className="flex flex-col flex-1 pt-1 min-w-0">
+                        <span className="text-base font-bold text-black uppercase tracking-tight group-hover:text-neutral-500 transition-colors truncate">{product.name}</span>
+                        <span className="text-sm text-neutral-500 mt-1">₹{product.price.toLocaleString()}</span>
+                      </div>
+                    </Link>
+                  ))}
+                  <button
+                    onClick={() => executeSearch(searchQuery)}
+                    className="w-full mt-2 bg-neutral-100 text-black font-bold py-3 rounded-lg uppercase tracking-widest text-xs"
+                  >
+                    View All Results
+                  </button>
+                </div>
+              )}
             </div>
           </motion.div>
         )}

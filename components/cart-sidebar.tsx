@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { X, Minus, Plus, Trash2 } from "lucide-react";
 import gsap from "gsap";
@@ -12,6 +12,16 @@ export function CartSidebar() {
   const sidebarRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [isProceeding, setIsProceeding] = useState(false);
+
+  const handleCheckout = () => {
+    setIsProceeding(true);
+    // Simulate Shopify Checkout API creation delay
+    setTimeout(() => {
+      setIsProceeding(false);
+      // In the future: window.location.href = shopifyCheckoutUrl;
+    }, 1500);
+  };
 
   useEffect(() => {
     const sidebar = sidebarRef.current;
@@ -160,8 +170,19 @@ export function CartSidebar() {
             <p className="text-neutral-500 text-xs mb-6">
               Shipping and taxes calculated at checkout.
             </p>
-            <button className="w-full bg-black text-white font-bold py-3 uppercase tracking-widest hover:bg-neutral-800 transition-colors">
-              Checkout
+            <button
+              onClick={handleCheckout}
+              disabled={isProceeding}
+              className={`w-full bg-black text-white font-bold py-3 uppercase tracking-widest transition-all flex items-center justify-center gap-2 ${isProceeding ? "opacity-75 cursor-not-allowed" : "hover:bg-neutral-800"}`}
+            >
+              {isProceeding ? (
+                <>
+                  <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  Processing...
+                </>
+              ) : (
+                "Checkout"
+              )}
             </button>
           </div>
         )}

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
-import Image from "next/image";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
     ChevronRight,
@@ -30,25 +30,24 @@ const COLORS = [
     { name: "Beige", value: "#d4c8b8" },
 ];
 
-const SORT_OPTIONS = ["Sale", "Featured", "New Arrivals", "Price: Low to High", "Price: High to Low",];
+const SORT_OPTIONS = ["Featured", "Price: Low to High", "Price: High to Low"];
 
-export default function ShopPage() {
+function SearchPageContent() {
+    const searchParams = useSearchParams();
+    const [searchQuery, setSearchQuery] = useState("");
     const [activeCategory, setActiveCategory] = useState("All");
     const [activeSizes, setActiveSizes] = useState<string[]>([]);
     const [activeColors, setActiveColors] = useState<string[]>([]);
     const [sortBy, setSortBy] = useState("Featured");
 
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            const searchParams = new URLSearchParams(window.location.search);
-            const sortParam = searchParams.get("sort");
-            if (sortParam === "new-arrivals") {
-                setSortBy("New Arrivals");
-            } else if (sortParam === "sale" || sortParam === "Sale") {
-                setSortBy("Sale");
-            }
+        const q = searchParams.get("q");
+        if (q) {
+            setSearchQuery(q);
+        } else {
+            setSearchQuery("");
         }
-    }, []);
+    }, [searchParams]);
 
     const { addToCart } = useCart();
 
@@ -78,7 +77,7 @@ export default function ShopPage() {
             setIsLoading(false);
         }, 800);
         return () => clearTimeout(timer);
-    }, [activeCategory, activeSizes, activeColors, sortBy]);
+    }, [activeCategory, activeSizes, activeColors, sortBy, searchQuery]);
 
     // Toggle helpers
     const toggleSize = (size: string) => {
@@ -102,9 +101,14 @@ export default function ShopPage() {
     const getFilteredProducts = () => {
         let filtered = [...products];
 
-        // Handle 'Sale' as a filter/sort combo
-        if (sortBy === "Sale") {
-            filtered = filtered.filter(p => p.isSale);
+        // 1. Search Query Filter
+        if (searchQuery) {
+            const query = searchQuery.toLowerCase();
+            filtered = filtered.filter(p =>
+                p.name.toLowerCase().includes(query) ||
+                p.brand?.toLowerCase().includes(query) ||
+                p.tagline?.toLowerCase().includes(query)
+            );
         }
 
         // Sort
@@ -112,8 +116,6 @@ export default function ShopPage() {
             filtered.sort((a, b) => a.price - b.price);
         } else if (sortBy === "Price: High to Low") {
             filtered.sort((a, b) => b.price - a.price);
-        } else if (sortBy === "New Arrivals") {
-            filtered.sort((a, b) => b.id - a.id);
         }
 
         return filtered;
@@ -186,15 +188,15 @@ export default function ShopPage() {
                 <nav className="flex items-center gap-3 text-xs md:text-sm text-neutral-500 font-medium mb-6 whitespace-nowrap overflow-x-auto scrollbar-hide pb-1">
                     <Link href="/" className="hover:text-black transition-colors shrink-0">Home</Link>
                     <ChevronRight className="w-3 h-3 text-neutral-700 shrink-0" />
-                    <Link href="/shop" className="text-black font-bold transition-colors shrink-0">Shop</Link>
+                    <span className="text-black font-bold transition-colors shrink-0">Search</span>
 
                 </nav>
 
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-neutral-200">
                     <div>
-                        <h1 className="text-4xl md:text-6xl font-black tracking-tight uppercase">Shop Collection</h1>
+                        <h1 className="text-4xl md:text-6xl font-black tracking-tight uppercase">Search Results</h1>
                         <p className="text-neutral-500 font-medium mt-2 max-w-lg">
-                            Elevate your everyday wardrobe with our premium essentials crafted from sustainable bamboo cotton.
+                            {searchQuery ? `Showing results for "${searchQuery}"` : "Search our entire catalog."}
                         </p>
                     </div>
 
@@ -275,7 +277,7 @@ export default function ShopPage() {
                         <div className="grid grid-cols-2 md:grid-cols-3 gap-x-4 gap-y-10 md:gap-x-8 md:gap-y-12">
                             {isLoading ? (
                                 <>
-                                    {[...Array(6)].map((_, i) => (
+                                    {[...Array(3)].map((_, i) => (
                                         <ProductCardSkeleton key={i} />
                                     ))}
                                 </>
@@ -308,25 +310,15 @@ export default function ShopPage() {
                             )}
 
                             {!isLoading && filteredProducts.length === 0 && (
-                                <div className="col-span-full py-20 text-center">
-                                    <p className="text-xl font-medium text-neutral-500">No products found matching your filters.</p>
-                                    <button onClick={clearFilters} className="mt-4 font-bold border-b border-black pb-1 uppercase tracking-widest">
+                                <div className="col-span-full py-20 text-center flex flex-col items-center justify-center border-2 border-dashed border-neutral-200 rounded-3xl">
+                                    <p className="text-xl font-bold mb-2">No results found for "{searchQuery}"</p>
+                                    <p className="text-neutral-500 mb-6 font-medium">Try checking your spelling or using more general terms.</p>
+                                    <button onClick={clearFilters} className="bg-black text-white px-8 py-3 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-neutral-800 transition-colors shadow-lg shadow-black/10 inline-block">
                                         Clear all filters
                                     </button>
                                 </div>
                             )}
                         </div>
-
-                        {/* Load More Mock */}
-                        {!isLoading && filteredProducts.length > 0 && (
-                            <div className="mt-16 text-center border-t border-neutral-200 pt-16">
-                                <button className="bg-white border-2 border-black text-black font-bold uppercase tracking-widest py-4 px-10 rounded-full hover:bg-neutral-50 transition-colors">
-                                    Load More
-                                </button>
-                                <p className="text-neutral-400 text-xs font-medium mt-4">Showing {filteredProducts.length} of 42 products</p>
-                            </div>
-                        )}
-
                     </div>
                 </div>
             </div>
@@ -394,7 +386,7 @@ export default function ShopPage() {
                 )}
             </AnimatePresence>
 
-            {/* Mobile Sort Bottom Drawer (reusing the same pattern if triggered from mobile menu) */}
+            {/* Mobile Sort Bottom Drawer */}
             <AnimatePresence>
                 {isSortDropdownOpen && (
                     <div className="lg:hidden">
@@ -432,5 +424,13 @@ export default function ShopPage() {
             </AnimatePresence>
 
         </div>
+    );
+}
+
+export default function SearchPage() {
+    return (
+        <Suspense fallback={<div>Loading search...</div>}>
+            <SearchPageContent />
+        </Suspense>
     );
 }

@@ -2,10 +2,10 @@ import { Hero } from "../components/hero";
 import { Categories } from "../components/categories";
 import { NewArrivals } from "../components/new-arrivals";
 import { VideoBanner } from "../components/video-banner";
-import { AboutStory } from "../components/about-story";
+
 import { FeaturesShowcase } from "../components/features-showcase";
 import { LookbookGrid } from "../components/lookbook-grid";
-import { Testimonials } from "../components/testimonials";
+
 import { CTASection } from "../components/cta-section";
 import { TextMarquee } from "../components/ui/text-marquee";
 import { FloatingShapes } from "../components/ui/floating-shapes";
@@ -47,9 +47,6 @@ export default function Home() {
         <VideoBanner />
       </ScrollReveal>
 
-      <ScrollReveal animation="rotate-in" className="relative z-10">
-        <AboutStory />
-      </ScrollReveal>
 
       <ScrollReveal animation="fade-up" className="relative z-10">
         <FeaturesShowcase />
@@ -59,9 +56,7 @@ export default function Home() {
         <LookbookGrid />
       </ScrollReveal>
 
-      <ScrollReveal animation="fade-up" className="relative z-10">
-        <Testimonials />
-      </ScrollReveal>
+
 
       <ScrollReveal animation="fade-up" className="relative z-10">
         <CTASection />

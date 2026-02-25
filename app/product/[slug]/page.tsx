@@ -38,7 +38,7 @@ const product = {
     compareAtPrice: 2499,
     rating: 4.8,
     reviewCount: 124,
-    stockStatus: "In Stock",
+    stockStatus: "Out of Stock",
     sku: "RV-BAM-TEE-01",
     images: [
         "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=2000&auto=format&fit=crop",
@@ -116,6 +116,8 @@ export default function ProductDetailsPage() {
             setValue("quantity", newQty);
         }
     };
+
+    const isOutOfStock = product.stockStatus === "Out of Stock";
 
     return (
         <div className="min-h-screen bg-background text-foreground pt-24 pb-20 selection:bg-black selection:text-white">
@@ -303,9 +305,10 @@ export default function ProductDetailsPage() {
                                     {/* Add to Cart CTA */}
                                     <button
                                         type="submit"
-                                        className="flex-1 bg-black text-white font-bold uppercase tracking-widest rounded-xl hover:bg-neutral-800 hover:scale-[1.02] transition-all duration-300 shadow-xl shadow-black/10"
+                                        disabled={isOutOfStock}
+                                        className={`flex-1 font-bold uppercase tracking-widest rounded-xl transition-all duration-300 shadow-xl shadow-black/10 ${isOutOfStock ? "bg-neutral-200 text-neutral-500 cursor-not-allowed shadow-none" : "bg-black text-white hover:bg-neutral-800 hover:scale-[1.02]"}`}
                                     >
-                                        Add to Cart
+                                        {isOutOfStock ? "Sold Out" : "Add to Cart"}
                                     </button>
 
                                     {/* Wishlist */}
@@ -323,9 +326,10 @@ export default function ProductDetailsPage() {
                                 <button
                                     type="button"
                                     onClick={handleBuyNow}
-                                    className="w-full h-14 border-2 border-black bg-white text-black font-black uppercase tracking-widest rounded-xl hover:bg-neutral-50 transition-colors"
+                                    disabled={isOutOfStock}
+                                    className={`w-full h-14 border-2 font-black uppercase tracking-widest rounded-xl transition-colors ${isOutOfStock ? "border-neutral-200 bg-neutral-100 text-neutral-400 cursor-not-allowed" : "border-black bg-white text-black hover:bg-neutral-50"}`}
                                 >
-                                    Buy It Now
+                                    {isOutOfStock ? "Unavailable" : "Buy It Now"}
                                 </button>
                             </div>
                         </form>
@@ -431,9 +435,10 @@ export default function ProductDetailsPage() {
                     </div>
                     <button
                         onClick={handleSubmit(onSubmit)}
-                        className="flex-1 bg-black text-white h-12 rounded-xl font-bold uppercase tracking-widest text-sm shadow-xl shadow-black/10 active:scale-95 transition-transform"
+                        disabled={isOutOfStock}
+                        className={`flex-1 h-12 rounded-xl font-bold uppercase tracking-widest text-sm shadow-xl shadow-black/10 transition-transform ${isOutOfStock ? "bg-neutral-200 text-neutral-500 cursor-not-allowed shadow-none" : "bg-black text-white active:scale-95"}`}
                     >
-                        Add To Cart
+                        {isOutOfStock ? "Sold Out" : "Add To Cart"}
                     </button>
                 </div>
             </div>

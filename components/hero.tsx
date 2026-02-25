@@ -22,7 +22,8 @@ export function Hero() {
         loop
         muted
         playsInline
-        poster="/hero-mobile.png"
+        preload="auto"
+        poster="/hero-phone.png"
         className="block md:hidden absolute top-0 left-0 w-full h-full object-cover"
       >
         <source src="/hero-phone.MP4" type="video/mp4" />

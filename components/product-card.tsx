@@ -19,8 +19,10 @@ export function ProductCard({
     footerAction,
     centeredText = false,
 }: ProductCardProps) {
+    const isOutOfStock = product.inStock === false;
+
     return (
-        <div className="group relative">
+        <div className={`group relative ${isOutOfStock ? "opacity-75" : ""}`}>
             <Link href={`/product/${product.id}`} className="block">
                 {/* Image Container */}
                 <div className="relative aspect-3/4 overflow-hidden bg-neutral-100 mb-5">
@@ -29,11 +31,15 @@ export function ProductCard({
                         alt={product.name}
                         fill
                         sizes="(max-width: 768px) 50vw, 25vw"
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                        className={`object-cover transition-transform duration-500 ${!isOutOfStock ? "group-hover:scale-105" : "grayscale-[50%]"}`}
                     />
 
                     {/* Badge Overlay */}
-                    {product.isSale && (
+                    {isOutOfStock ? (
+                        <span className="absolute top-2 left-2 bg-neutral-200 text-neutral-600 text-[12px] font-bold px-3 py-1 uppercase z-10 tracking-wider">
+                            Sold Out
+                        </span>
+                    ) : product.isSale && (
                         <span className="absolute top-2 left-2 bg-black text-white border border-white shadow-lg text-[14px] font-bold px-2 py-1 uppercase z-10">
                             Sale
                         </span>
@@ -45,7 +51,7 @@ export function ProductCard({
                         </div>
                     )}
 
-                    {imageOverlay && (
+                    {imageOverlay && !isOutOfStock && (
                         <div className="absolute bottom-2 right-2 opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-10">
                             {imageOverlay}
                         </div>
