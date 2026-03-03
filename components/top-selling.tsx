@@ -85,8 +85,12 @@ export function TopSelling() {
       type: "x",
       inertia: true,
       bounds: { minX: -singleSetWidth, maxX: 0 },
-      onDragStart: () => animRef.current?.pause(),
-      onDragEnd: () => animRef.current?.resume(),
+      onDragStart: () => {
+        animRef.current?.pause();
+      },
+      onDragEnd: () => {
+        animRef.current?.resume();
+      },
       cursor: "grab",
       activeCursor: "grabbing",
     });
