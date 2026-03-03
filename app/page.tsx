@@ -1,63 +1,34 @@
 import { Hero } from "../components/hero";
-
-import { NewArrivals } from "../components/new-arrivals";
+import { TopSelling } from "../components/top-selling";
+import { ImageBanner } from "../components/image-banner";
+import { ProductShowcase } from "../components/product-showcase";
+import { EditorialSection } from "../components/editorial-section";
 import { VideoBanner } from "../components/video-banner";
-
-import { FeaturesShowcase } from "../components/features-showcase";
-import { LookbookGrid } from "../components/lookbook-grid";
-
-import { CTASection } from "../components/cta-section";
-import { TextMarquee } from "../components/ui/text-marquee";
-import { FloatingShapes } from "../components/ui/floating-shapes";
 import { ScrollReveal } from "../components/ui/scroll-reveal";
 
 export default function Home() {
   return (
     <div className="relative overflow-hidden min-h-screen bg-background text-foreground selection:bg-black selection:text-white">
-      <FloatingShapes />
-
+      {/* 1 — Full-screen video hero */}
       <Hero />
 
-      <div className="py-4 bg-black -rotate-1 border-y-2 border-white z-10 relative my-8">
-        <TextMarquee
-          text="NEW COLLECTION DROP • LIMITED EDITION • RANG VIRANGI • SUMMER VIBES • GET STYLED • "
-          className="text-4xl font-black text-white uppercase tracking-tighter"
-          speed={15}
-        />
-      </div>
+      {/* 2 — Top Selling Products */}
+      <TopSelling />
 
-
-
-      <div className="py-4 bg-white rotate-1 border-y-2 border-black z-10 relative my-8">
-        <TextMarquee
-          text="FRESH ARRIVALS • CHECK IT OUT • TRENDING NOW • CLOTHING FOR GEN Z • UNIQUE STYLES • "
-          className="text-4xl font-black text-black uppercase tracking-tighter"
-          direction="right"
-          speed={15}
-        />
-      </div>
-
-      <ScrollReveal animation="scale-in" className="relative z-10">
-        <NewArrivals />
+      {/* 3 — Artwork Banner */}
+      <ImageBanner />
+      <ScrollReveal animation="fade-up" className="relative z-10">
+        <ProductShowcase />
       </ScrollReveal>
 
+      {/* 3 — Dark editorial product cards */}
+      <ScrollReveal animation="fade-up" className="relative z-10">
+        <EditorialSection />
+      </ScrollReveal>
+
+      {/* 4 — Cinematic video section */}
       <ScrollReveal animation="fade-up" className="relative z-10">
         <VideoBanner />
-      </ScrollReveal>
-
-
-      <ScrollReveal animation="fade-up" className="relative z-10">
-        <FeaturesShowcase />
-      </ScrollReveal>
-
-      <ScrollReveal animation="scale-in" className="relative z-10">
-        <LookbookGrid />
-      </ScrollReveal>
-
-
-
-      <ScrollReveal animation="fade-up" className="relative z-10">
-        <CTASection />
       </ScrollReveal>
     </div>
   );

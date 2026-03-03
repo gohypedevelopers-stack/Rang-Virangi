@@ -122,7 +122,7 @@ export function Navbar() {
         <div className="flex-shrink-0 flex-1 lg:flex-none flex justify-start lg:absolute lg:left-1/2 lg:-translate-x-1/2" ref={logoRef}>
           <Link href="/" className="font-black italic tracking-tighter">
             <div className="flex flex-row md:flex-col items-start gap-[6px] md:gap-[2px] leading-none whitespace-nowrap">
-              <span className="border-b-[3px] border-black pb-0.5 text-xl md:text-[30px] font-caesar tracking-normal not-italic whitespace-nowrap">RANG VIRANGI</span>
+              <span className="border-b-[3px] border-black pb-0.5 text-xl md:text-[30px] font-caesar tracking-normal not-italic whitespace-nowrap">RANGVIRANGI</span>
               <span className="border-b-[3px] border-black pb-0.5 text-xl md:text-[22px]"></span>
             </div>
           </Link>

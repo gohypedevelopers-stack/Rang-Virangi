@@ -1,0 +1,146 @@
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
+import { products } from "@/lib/products";
+import { useCart } from "@/context/cart-context";
+import { ShoppingCart } from "lucide-react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+export function ProductShowcase() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const { addToCart } = useCart();
+
+  // We now show all products
+  const displayedProducts = products;
+
+  const handleAddToCart = (
+    e: React.MouseEvent,
+    product: (typeof products)[0],
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+    const card = (e.currentTarget as HTMLElement).closest(".product-card");
+    const img = card?.querySelector("img");
+    if (img) addToCart(product, img as HTMLImageElement);
+  };
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Card entrance animation
+      gsap.fromTo(
+        ".product-card",
+        { y: 100, opacity: 0, rotate: -3 },
+        {
+          y: 0,
+          opacity: 1,
+          rotate: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "back.out(1.5)",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          },
+        },
+      );
+    }, sectionRef);
+    return () => ctx.revert();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="w-full bg-white pt-24 pb-20 relative overflow-hidden border-y-8 border-black"
+    >
+      <div className="container mx-auto px-4 md:px-8 mt-16">
+        <div className="flex flex-col md:flex-row justify-between items-end mb-8 relative z-10">
+          <h2 className="text-4xl md:text-5xl font-black uppercase text-black leading-none drop-shadow-[4px_4px_0px_#e5e5e5]">
+            THE COLLECTION
+          </h2>
+          <Link
+            href="/shop"
+            className="group flex items-center gap-2 bg-black text-white px-8 py-4 rounded-full font-black uppercase tracking-widest mt-6 md:mt-0 hover:-translate-y-1 transition-transform cursor-pointer shadow-[6px_6px_0px_#e5e5e5] border-2 border-black"
+          >
+            <span>Shop All </span>
+            <span className="text-2xl leading-none group-hover:rotate-45 transition-transform">
+              ↗
+            </span>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-2">
+          {displayedProducts.map((product) => (
+            <div
+              key={product.id}
+              className="product-card group relative bg-white flex flex-col pb-4"
+            >
+              <Link
+                href={`/product/${product.id}`}
+                className="block relative flex-grow mb-3"
+              >
+                {/* Image Container */}
+                <div className="relative aspect-[3/4] overflow-hidden bg-neutral-100 mb-0 z-0">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 25vw"
+                  />
+                  {product.backImage && (
+                    <Image
+                      src={product.backImage}
+                      alt={product.name}
+                      fill
+                      className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 absolute inset-0"
+                      sizes="(max-width: 768px) 100vw, 25vw"
+                    />
+                  )}
+                  {/* Floating badges */}
+                  <div className="absolute top-2 left-2 bg-white text-black text-[9px] font-bold uppercase px-2 py-1 tracking-widest">
+                    {product.isSale ? "SALE" : "HOT"}
+                  </div>
+                </div>
+              </Link>
+
+              {/* Product Info & Button */}
+              <div className="flex flex-col grow px-1">
+                <Link href={`/product/${product.id}`} className="block mb-4">
+                  <h3 className="text-[11px] md:text-xs font-semibold uppercase text-black tracking-wider mb-1 truncate">
+                    {product.name}
+                  </h3>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] md:text-xs text-neutral-600">
+                      ₹{product.price.toLocaleString()}
+                    </span>
+                    {product.originalPrice && (
+                      <span className="text-[10px] text-neutral-400 line-through">
+                        ₹{product.originalPrice.toLocaleString()}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+
+                <div className="mt-auto">
+                  {/* Add to Cart Button */}
+                  <button
+                    onClick={(e) => handleAddToCart(e, product)}
+                    className="w-full bg-transparent text-black border border-black text-[10px] md:text-xs uppercase py-2.5 tracking-widest hover:bg-black hover:text-white transition-colors duration-300 flex justify-center items-center gap-2"
+                  >
+                    <ShoppingCart className="w-3.5 h-3.5" />
+                    <span>Add To Cart</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
