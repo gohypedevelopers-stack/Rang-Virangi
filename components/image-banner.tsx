@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import bannerImg from "../public/suger-daddy-banner.png";
+import bannerImg from "../public/sugar-daddy-banner.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
