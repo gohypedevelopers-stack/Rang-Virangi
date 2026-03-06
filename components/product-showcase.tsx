@@ -15,8 +15,8 @@ export function ProductShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const { addToCart } = useCart();
 
-  // We now show all products
-  const displayedProducts = products;
+  // We now show only featured products for the home page showcase
+  const displayedProducts = products.filter((p) => p.collection === "featured");
 
   const handleAddToCart = (
     e: React.MouseEvent,
@@ -81,10 +81,10 @@ export function ProductShowcase() {
             >
               <Link
                 href={`/product/${product.id}`}
-                className="block relative flex-grow mb-3"
+                className="block relative grow mb-3"
               >
                 {/* Image Container */}
-                <div className="relative aspect-[3/4] overflow-hidden bg-neutral-100 mb-0 z-0">
+                <div className="relative aspect-3/4 overflow-hidden bg-neutral-100 mb-0 z-0">
                   <Image
                     src={product.image}
                     alt={product.name}

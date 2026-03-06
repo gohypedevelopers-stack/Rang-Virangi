@@ -7,9 +7,6 @@ function Footer() {
       <div className="w-full">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-10 md:mb-8">
-            <Link href="/" className="flex items-center gap-2">
-              <h2 className="text-xl font-bold text-black font-caesar">RangVirangi</h2>
-            </Link>
 
             <p className="text-neutral-600 mt-4 max-w-xs">
               Premium streetwear collection. Redefining fashion with bold

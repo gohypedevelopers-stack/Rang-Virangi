@@ -136,7 +136,7 @@ export function Navbar() {
 
         {/* Logo Section */}
         <div
-          className="flex-shrink-0 flex-1 lg:flex-none flex justify-start lg:absolute lg:left-1/2 lg:-translate-x-1/2"
+          className="shrink-0 flex-1 lg:flex-none flex justify-start lg:absolute lg:left-1/2 lg:-translate-x-1/2"
           ref={logoRef}
         >
           <Link href="/" className="flex items-center">
@@ -264,7 +264,7 @@ export function Navbar() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 10 }}
                   transition={{ duration: 0.2 }}
-                  className="hidden md:flex absolute right-0 top-full mt-2 w-64 bg-white border border-neutral-200 shadow-xl rounded-2xl overflow-hidden z-50 flex-col"
+                  className="hidden md:flex absolute right-0 top-full mt-2 w-64 bg-white border border-neutral-200 shadow-xl rounded-2xl overflow-hidden z-50 flex-col text-black"
                 >
                   <div className="p-4 border-b border-neutral-100 bg-neutral-50/50">
                     <p className="text-xl font-black tracking-tight">
@@ -338,7 +338,7 @@ export function Navbar() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-[90] bg-black/50 backdrop-blur-sm"
+              className="fixed inset-0 z-90 bg-black/50 backdrop-blur-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             />
             {/* Drawer */}
@@ -347,7 +347,7 @@ export function Navbar() {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: "-100%" }}
               transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
-              className="fixed top-0 left-0 bottom-0 z-[100] h-[100dvh] bg-white text-black w-screen md:w-1/2 flex flex-col overflow-hidden shadow-2xl"
+              className="fixed top-0 left-0 bottom-0 z-100 h-dvh bg-white text-black w-[80%] max-w-[400px] md:w-1/2 flex flex-col overflow-hidden shadow-2xl"
             >
               {/* Mobile Menu Header */}
               <div className="relative flex items-center justify-between p-6 border-b border-neutral-100 min-h-[80px] bg-white">
@@ -471,7 +471,7 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-0 z-[120] w-screen h-screen bg-white md:hidden flex flex-col overflow-hidden"
+            className="fixed inset-0 z-120 w-screen h-screen bg-white md:hidden flex flex-col overflow-hidden"
           >
             <div className="flex items-center justify-between p-6 border-b border-neutral-100 min-h-[80px]">
               <span className="text-xl font-bold tracking-tight">Search</span>
@@ -554,10 +554,10 @@ export function Navbar() {
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "tween", duration: 0.3 }}
-            className="fixed inset-0 z-[120] w-screen h-screen bg-white md:hidden flex flex-col overflow-hidden"
+            className="fixed inset-0 z-120 w-screen h-screen bg-white md:hidden flex flex-col overflow-hidden text-black"
           >
             <div className="flex items-center justify-between p-6 border-b border-neutral-100 min-h-[80px] bg-neutral-50/50">
-              <p className="text-xl md:text-2xl font-black tracking-tight">
+              <p className="text-xl md:text-2xl font-bold tracking-tight">
                 Hi, User
               </p>
               <button
