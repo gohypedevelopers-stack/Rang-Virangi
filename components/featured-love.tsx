@@ -21,6 +21,8 @@ export function FeaturedLove() {
     image: "/love-tee-mock.jpg",
     isSale: true,
     inStock: true,
+    collection: "shop" as const,
+    category: "Tees" as const,
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {

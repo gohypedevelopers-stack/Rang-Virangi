@@ -21,6 +21,8 @@ export function FeaturedCulture() {
     image: "/culture-white-front.jpg",
     isSale: true,
     inStock: true,
+    collection: "shop" as const,
+    category: "Tees" as const,
   };
 
   const handleAddToCart = (e: React.MouseEvent) => {
