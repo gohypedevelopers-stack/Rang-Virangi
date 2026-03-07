@@ -56,16 +56,19 @@ export function EditorialSection() {
 
   const editorialItems = [
     {
+      id: 19,
       image: "/products/bombay-sapphire-sage-tee-back.jpeg",
       label: "ROBOSEXUAL",
       sublabel: "Love Is Just Another Simulation",
     },
     {
+      id: 12,
       image: "/products/rage-tiger-black-tee-back.jpeg",
       label: "BOMBAY SAPPHIRE",
       sublabel: "Unleash The Beast Within",
     },
     {
+      id: 14,
       image: "/products/sugar-daddy-navy-tee-back.jpeg",
       label: "SUGAR DADDY",
       sublabel: "Dripping In Dollars",
@@ -84,7 +87,7 @@ export function EditorialSection() {
           className="group relative hidden md:block"
           style={{ opacity: 0 }}
         >
-          <Link href="/shop" className="block">
+          <Link href={`/product/${editorialItems[0].id}`} className="block">
             <div className="relative aspect-square md:aspect-auto md:h-full overflow-hidden bg-neutral-950">
               <Image
                 src={editorialItems[0].image}
@@ -123,7 +126,7 @@ export function EditorialSection() {
               className="group relative"
               style={{ opacity: 0 }}
             >
-              <Link href="/shop" className="block h-full">
+              <Link href={`/product/${item.id}`} className="block h-full">
                 <div className="relative h-full min-h-[280px] md:min-h-0 overflow-hidden bg-neutral-950">
                   <Image
                     src={item.image}

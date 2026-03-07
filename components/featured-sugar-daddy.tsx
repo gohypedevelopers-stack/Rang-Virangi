@@ -76,7 +76,7 @@ export function FeaturedSugarDaddy() {
           </div>
 
           <Link
-            href="/shop"
+            href={`/product/${sugarDaddyProduct.id}`}
             className="group flex flex-none items-center gap-2 bg-black text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-black uppercase text-sm md:text-base tracking-widest hover:-translate-y-1 transition-transform cursor-pointer shadow-[3px_3px_0px_#e5e5e5] md:shadow-[6px_6px_0px_#e5e5e5] border-2 border-black"
           >
             <span>Shop Edition </span>
@@ -88,7 +88,10 @@ export function FeaturedSugarDaddy() {
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-2">
           <div className="featured-sd-image product-card group relative bg-white flex flex-col pb-4">
-            <Link href="/shop" className="block relative grow mb-3">
+            <Link
+              href={`/product/${sugarDaddyProduct.id}`}
+              className="block relative grow mb-3"
+            >
               {/* Image Container */}
               <div className="relative aspect-3/4 overflow-hidden bg-neutral-100 mb-0 z-0">
                 <Image
@@ -107,7 +110,10 @@ export function FeaturedSugarDaddy() {
 
             {/* Product Info & Button */}
             <div className="flex flex-col grow px-1">
-              <Link href="/shop" className="block mb-4">
+              <Link
+                href={`/product/${sugarDaddyProduct.id}`}
+                className="block mb-4"
+              >
                 <h3 className="text-[11px] md:text-xs font-semibold uppercase text-black tracking-wider mb-1 truncate">
                   Sugar Daddy Tee
                 </h3>

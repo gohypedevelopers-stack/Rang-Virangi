@@ -139,7 +139,7 @@ export function AboutStory() {
             Our Story
           </p>
           <h2 className="text-3xl md:text-5xl lg:text-6xl font-black text-black tracking-tight leading-none">
-            RANG VIRANGI
+            RANGVIRANGI
           </h2>
         </div>
 

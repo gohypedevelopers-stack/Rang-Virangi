@@ -31,7 +31,7 @@ export default function AboutPage() {
                     <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 uppercase leading-tight">
                         We Are <br />
                         <span className="font-caesar font-normal tracking-normal border-b-[6px] border-black pb-1 inline-block mt-2 bg-gradient-to-r from-slate-600 via-neutral-300 to-zinc-700 bg-clip-text text-transparent">
-                            Rang Virangi
+                            RangVirangi
                         </span>
                     </h1>
                     <p className="text-lg md:text-xl text-neutral-600 max-w-2xl mx-auto leading-relaxed font-medium mt-8">

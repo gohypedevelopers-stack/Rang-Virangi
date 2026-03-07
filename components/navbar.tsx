@@ -119,7 +119,7 @@ export function Navbar() {
     <nav
       ref={navRef}
       className={`fixed top-0 left-0 w-full z-50 py-3 pl-6 pr-[2px] md:py-3 md:px-6 transition-all duration-300 backdrop-blur-md shadow-sm ${
-        isScrolled ? "bg-black/95 text-white" : "bg-white/95 text-black"
+        isScrolled ? "bg-black/95 text-white" : "bg-white text-black"
       }`}
     >
       <div className="mx-auto flex items-center justify-between relative w-full pr-0 md:px-4 lg:px-8">
@@ -393,7 +393,7 @@ export function Navbar() {
                       <Link
                         href={link.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="py-4 flex items-center justify-between text-xl md:text-2xl font-black uppercase tracking-tight hover:text-neutral-500 transition-colors group"
+                        className="py-4 flex items-center justify-between text-xl md:text-lg font-black uppercase tracking-tight hover:text-neutral-500 transition-colors group"
                       >
                         <span>{link.name}</span>
                         <span className="text-neutral-300 group-hover:text-black transition-colors group-hover:translate-x-1 duration-300">
@@ -414,7 +414,7 @@ export function Navbar() {
                       onClick={() =>
                         setIsMobileCategoriesOpen(!isMobileCategoriesOpen)
                       }
-                      className="w-full py-4 flex items-center justify-between text-xl md:text-2xl font-black uppercase tracking-tight hover:text-neutral-500 transition-colors group"
+                      className="w-full py-4 flex items-center justify-between text-xl md:text-lg font-black uppercase tracking-tight hover:text-neutral-500 transition-colors group"
                     >
                       <span>Categories</span>
                       <span className="text-neutral-300 group-hover:text-black transition-colors duration-300">
@@ -447,7 +447,7 @@ export function Navbar() {
                                   setIsMobileMenuOpen(false);
                                   setIsMobileCategoriesOpen(false);
                                 }}
-                                className="text-lg font-bold text-neutral-600 hover:text-black uppercase tracking-wider py-2 transition-colors border-b border-neutral-50 last:border-none"
+                                className="text-m font-bold text-neutral-600 hover:text-black uppercase tracking-wider py-2 transition-colors border-b border-neutral-50 last:border-none"
                               >
                                 {cat}
                               </Link>

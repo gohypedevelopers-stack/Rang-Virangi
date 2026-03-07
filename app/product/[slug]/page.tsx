@@ -243,7 +243,7 @@ export default function ProductDetailsPage() {
               <p className="text-neutral-500 font-bold text-xs tracking-[0.2em] mb-2 uppercase">
                 {product.brand}
               </p>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-black tracking-tight text-black mb-3 leading-tight">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight text-black mb-3 leading-tight">
                 {product.name}
               </h1>
               <p className="text-neutral-600 font-medium text-sm md:text-base">
@@ -361,7 +361,7 @@ export default function ProductDetailsPage() {
 
               {/* Quantity & Actions */}
               <div className="space-y-4 pt-4">
-                <div className="flex gap-4 h-14">
+                <div className="flex gap-4 h-12">
                   {/* Stepper */}
                   <div className="flex items-center border border-neutral-200 rounded-xl bg-neutral-50 shrink-0 w-32">
                     <button
@@ -387,7 +387,7 @@ export default function ProductDetailsPage() {
                   <button
                     type="submit"
                     disabled={isOutOfStock}
-                    className={`flex-1 font-bold uppercase tracking-widest rounded-xl transition-all duration-300 shadow-xl shadow-black/10 ${isOutOfStock ? "bg-neutral-200 text-neutral-500 cursor-not-allowed shadow-none" : "bg-black text-white hover:bg-neutral-800 hover:scale-[1.02]"}`}
+                    className={`flex-1 font-bold uppercase tracking-widest text-xs rounded-xl transition-all duration-300 shadow-xl shadow-black/10 ${isOutOfStock ? "bg-neutral-200 text-neutral-500 cursor-not-allowed shadow-none" : "bg-black text-white hover:bg-neutral-800 hover:scale-[1.02]"}`}
                   >
                     {isOutOfStock ? "Sold Out" : "Add to Cart"}
                   </button>
@@ -396,14 +396,14 @@ export default function ProductDetailsPage() {
                   <button
                     type="button"
                     onClick={() => setIsWishlisted(!isWishlisted)}
-                    className={`w-14 h-14 rounded-xl border flex items-center justify-center transition-all shrink-0 ${
+                    className={`w-12 h-12 rounded-xl border flex items-center justify-center transition-all shrink-0 ${
                       isWishlisted
                         ? "border-red-500 text-red-500 bg-red-50"
                         : "border-neutral-200 text-black hover:border-black"
                     }`}
                   >
                     <Heart
-                      className={`w-5 h-5 ${isWishlisted ? "fill-current" : ""}`}
+                      className={`w-4 h-4 ${isWishlisted ? "fill-current" : ""}`}
                     />
                   </button>
                 </div>
@@ -413,7 +413,7 @@ export default function ProductDetailsPage() {
                   type="button"
                   onClick={handleBuyNow}
                   disabled={isOutOfStock}
-                  className={`w-full h-14 border-2 font-black uppercase tracking-widest rounded-xl transition-colors ${isOutOfStock ? "border-neutral-200 bg-neutral-100 text-neutral-400 cursor-not-allowed" : "border-black bg-white text-black hover:bg-neutral-50"}`}
+                  className={`w-full h-12 border-2 font-black uppercase tracking-widest text-xs rounded-xl transition-colors ${isOutOfStock ? "border-neutral-200 bg-neutral-100 text-neutral-400 cursor-not-allowed" : "border-black bg-white text-black hover:bg-neutral-50"}`}
                 >
                   {isOutOfStock ? "Unavailable" : "Buy It Now"}
                 </button>
