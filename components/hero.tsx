@@ -1,5 +1,7 @@
 "use client";
 
+import CoinModel from "./coin-model";
+
 export function Hero() {
   return (
     <div className="relative w-full h-screen overflow-hidden bg-black">
@@ -29,6 +31,11 @@ export function Hero() {
         <source src="/hero-phone.MP4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+
+      {/* 3D Coin Overlay */}
+      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
+        <CoinModel />
+      </div>
     </div>
   );
 }
