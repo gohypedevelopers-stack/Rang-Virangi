@@ -16,7 +16,7 @@ export function FeaturedSugarDaddy() {
     id: 997,
     name: "Sugar Daddy Tee",
     variant: "NAVY BLUE",
-    price: 1499,
+    price: 1505,
     originalPrice: 1999,
     image: "/sugar-daddy-tee.jpg",
     isSale: true,
@@ -118,10 +118,10 @@ export function FeaturedSugarDaddy() {
                   Sugar Daddy Tee
                 </h3>
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] md:text-xs text-neutral-600">
-                    ₹1,499
+                  <span className="text-[14px] md:text-base font-black text-black/60 group-hover:text-black transition-colors">
+                    ₹1,505
                   </span>
-                  <span className="text-[10px] text-neutral-400 line-through">
+                  <span className="text-[11px] md:text-xs text-neutral-400 line-through font-bold">
                     ₹1,999
                   </span>
                 </div>

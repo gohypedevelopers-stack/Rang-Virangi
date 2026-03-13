@@ -7,7 +7,6 @@ function Footer() {
       <div className="w-full">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-10 md:mb-8">
-
             <p className="text-neutral-600 mt-4 max-w-xs">
               Premium streetwear collection. Redefining fashion with bold
               designs and quality craftsmanship.
@@ -122,8 +121,8 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="w-full flex mt-8 items-center justify-center">
-          <h1 className="text-center text-4xl md:text-6xl lg:text-[11.5rem] scale-y-125 overflow-hidden font-caesar uppercase bg-clip-text text-black select-none tracking-normal whitespace-nowrap">
+        <div className="w-full flex mt-12 items-center justify-center border-t border-neutral-100 pt-6">
+          <h1 className="text-center text-5xl md:text-8xl lg:text-[10rem] font-black uppercase text-black select-none tracking-[-0.05em] leading-none whitespace-nowrap">
             RangVirangi
           </h1>
         </div>

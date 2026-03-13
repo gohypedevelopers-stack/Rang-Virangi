@@ -115,11 +115,11 @@ export function ProductShowcase() {
                     {product.name}
                   </h3>
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] md:text-xs text-neutral-600">
+                    <span className="text-[14px] md:text-base font-black text-black/60 group-hover:text-black transition-colors">
                       ₹{product.price.toLocaleString()}
                     </span>
                     {product.originalPrice && (
-                      <span className="text-[10px] text-neutral-400 line-through">
+                      <span className="text-[11px] md:text-xs text-neutral-400 line-through font-bold">
                         ₹{product.originalPrice.toLocaleString()}
                       </span>
                     )}

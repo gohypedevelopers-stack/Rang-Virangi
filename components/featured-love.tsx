@@ -16,7 +16,7 @@ export function FeaturedLove() {
     id: 998,
     name: "Love Simulation Edition Tee",
     variant: "WHITE",
-    price: 1599,
+    price: 1095,
     originalPrice: 1999,
     image: "/love-tee-mock.jpg",
     isSale: true,
@@ -114,10 +114,10 @@ export function FeaturedLove() {
                   Love Simulation Tee
                 </h3>
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] md:text-xs text-neutral-600">
-                    ₹1,599
+                  <span className="text-[14px] md:text-base font-black text-black/60 group-hover:text-black transition-colors">
+                    ₹1,095
                   </span>
-                  <span className="text-[10px] text-neutral-400 line-through">
+                  <span className="text-[11px] md:text-xs text-neutral-400 line-through font-bold">
                     ₹1,999
                   </span>
                 </div>

@@ -16,7 +16,7 @@ export function FeaturedCulture() {
     id: 996,
     name: "Culture Symphony Tour Tee",
     variant: "WHITE",
-    price: 1499,
+    price: 1202,
     originalPrice: 1999,
     image: "/culture-white-front.jpg",
     isSale: true,
@@ -147,10 +147,10 @@ export function FeaturedCulture() {
                     {product.label}
                   </h3>
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] md:text-xs text-neutral-600">
-                      ₹1,499
+                    <span className="text-[14px] md:text-base font-black text-black/60 group-hover:text-black transition-colors">
+                      ₹1,202
                     </span>
-                    <span className="text-[10px] text-neutral-400 line-through">
+                    <span className="text-[11px] md:text-xs text-neutral-400 line-through font-bold">
                       ₹1,999
                     </span>
                   </div>

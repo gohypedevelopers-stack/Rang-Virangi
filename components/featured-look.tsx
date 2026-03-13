@@ -16,7 +16,7 @@ export function FeaturedLook() {
     id: 999,
     name: "Bombay Sapphire Edition Tee",
     variant: "WHITE",
-    price: 1599,
+    price: 909,
     originalPrice: 1999,
     image: "/artwork.jpg",
     isSale: true,
@@ -123,10 +123,10 @@ export function FeaturedLook() {
                   Bombay Sapphire Edition Tee
                 </h3>
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] md:text-xs text-neutral-600">
-                    ₹1,599
+                  <span className="text-[14px] md:text-base font-black text-black/60 group-hover:text-black transition-colors">
+                    ₹909
                   </span>
-                  <span className="text-[10px] text-neutral-400 line-through">
+                  <span className="text-[11px] md:text-xs text-neutral-400 line-through font-bold">
                     ₹1,999
                   </span>
                 </div>
