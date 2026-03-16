@@ -41,7 +41,7 @@ export function ImageBanner() {
     >
       {/* Banner container - maintain original aspect ratio to avoid clipping */}
       <div className="relative w-full overflow-hidden flex items-center justify-center">
-        <Link href="/product/997" className="block cursor-pointer w-full">
+        <Link href="/product/4" className="block cursor-pointer w-full">
           <Image
             ref={imageRef}
             src={bannerImg}

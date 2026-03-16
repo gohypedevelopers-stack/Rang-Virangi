@@ -38,7 +38,7 @@ export function CultureBanner() {
       className="w-full relative overflow-hidden bg-neutral-200"
     >
       <div className="relative w-full culture-banner-image">
-        <Link href="/product/996" className="block cursor-pointer">
+        <Link href="/product/1" className="block cursor-pointer">
           <Image
             src="/culture-banner.png"
             alt="Rang Virangi Culture Symphony Tour"

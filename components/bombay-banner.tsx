@@ -38,7 +38,7 @@ export function BombayBanner() {
       className="w-full relative overflow-hidden bg-[#5eb4ae]"
     >
       <div className="relative w-full bombay-banner-image">
-        <Link href="/product/999" className="block cursor-pointer">
+        <Link href="/product/6" className="block cursor-pointer">
           <Image
             src="/bombay-banner.jpg"
             alt="Bombay Sapphire Botanical Symphony"

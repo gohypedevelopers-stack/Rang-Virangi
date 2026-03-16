@@ -38,7 +38,7 @@ export function LoveBanner() {
       className="w-full relative overflow-hidden bg-black"
     >
       <div className="relative w-full love-banner-image">
-        <Link href="/product/998" className="block cursor-pointer">
+        <Link href="/product/5" className="block cursor-pointer">
           <Image
             src="/love-robot-banner.png"
             alt="Love Simulation Collection"

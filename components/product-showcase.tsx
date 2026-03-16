@@ -15,8 +15,8 @@ export function ProductShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const { addToCart } = useCart();
 
-  // We now show only featured products for the home page showcase
-  const displayedProducts = products.filter((p) => p.collection === "featured");
+  // We now show all products for the home page showcase
+  const displayedProducts = products;
 
   const handleAddToCart = (
     e: React.MouseEvent,

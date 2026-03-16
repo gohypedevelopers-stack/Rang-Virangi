@@ -13,7 +13,7 @@ export function FeaturedCulture() {
   const { addToCart } = useCart();
 
   const cultureProduct = {
-    id: 996,
+    id: 1,
     name: "Culture Symphony Tour Tee",
     variant: "WHITE",
     price: 1202,
