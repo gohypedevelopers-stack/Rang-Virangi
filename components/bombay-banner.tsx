@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -37,14 +38,16 @@ export function BombayBanner() {
       className="w-full relative overflow-hidden bg-[#5eb4ae]"
     >
       <div className="relative w-full bombay-banner-image">
-        <Image
-          src="/bombay-banner.jpg"
-          alt="Bombay Sapphire Botanical Symphony"
-          width={2880}
-          height={1200}
-          className="w-full h-auto object-contain"
-          priority
-        />
+        <Link href="/product/999" className="block cursor-pointer">
+          <Image
+            src="/bombay-banner.jpg"
+            alt="Bombay Sapphire Botanical Symphony"
+            width={2880}
+            height={1200}
+            className="w-full h-auto object-contain transition-transform duration-500 hover:scale-[1.02]"
+            priority
+          />
+        </Link>
       </div>
     </section>
   );

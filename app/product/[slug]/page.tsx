@@ -143,10 +143,26 @@ export default function ProductDetailsPage() {
       "The vanguard of modern streetwear. Crafted for excellence.",
   };
 
-  const relatedProducts = useMemo(
-    () => products.filter((p) => p.id !== productData.id).slice(0, 4),
-    [productData.id],
-  );
+  const cultureRecommendations = [
+    { id: "996", name: "Culture Symphony Tee", image: "/culture-white-front.jpg", price: 1202 },
+    { id: "16", name: "Culture Symphony Tee — Navy", image: "/culture-navy-back.jpg", price: 1202 },
+    { id: "16", name: "Culture Symphony Tee — Black", image: "/culture-black-back.jpg", price: 1202 },
+    { id: "996", name: "Culture Symphony Tee — Back", image: "/culture-white-back.jpg", price: 1202 },
+  ];
+
+  const relatedProducts = useMemo(() => {
+    if (slug === "996") return cultureRecommendations;
+    let related = products.filter(
+      (p) => p.id !== productData.id && p.category === productData.category
+    );
+    if (related.length < 4) {
+      const otherProducts = products.filter(
+        (p) => p.id !== productData.id && p.category !== productData.category
+      );
+      related = [...related, ...otherProducts].slice(0, 4);
+    }
+    return related.slice(0, 4);
+  }, [slug, productData.id, productData.category]);
 
   const [activeImage, setActiveImage] = useState(0);
   const [isWishlisted, setIsWishlisted] = useState(false);
@@ -214,6 +230,56 @@ export default function ProductDetailsPage() {
         </svg>
       </div>
 
+      {/* PRODUCT SPECIFIC HERO BANNERS */}
+      {slug === "996" && (
+        <div className="w-full mb-12 -mt-12 md:-mt-16 border-b border-neutral-100">
+          <Image
+            src="/culture-banner.png"
+            alt="Culture Symphony Banner"
+            width={2880}
+            height={960}
+            className="w-full h-auto object-contain"
+            priority
+          />
+        </div>
+      )}
+      {slug === "997" && (
+        <div className="w-full mb-12 -mt-12 md:-mt-16 border-b border-neutral-100">
+          <Image
+            src="/sugar-daddy-banner.png"
+            alt="Sugar Daddy Banner"
+            width={1920}
+            height={1080}
+            className="w-full h-auto"
+            priority
+          />
+        </div>
+      )}
+      {slug === "998" && (
+        <div className="w-full mb-12 -mt-12 md:-mt-16 border-b border-neutral-100">
+          <Image
+            src="/love-robot-banner.png"
+            alt="Love Simulation Banner"
+            width={2880}
+            height={1400}
+            className="w-full h-auto object-contain"
+            priority
+          />
+        </div>
+      )}
+      {(slug === "999" || slug === "12") && (
+        <div className="w-full mb-12 -mt-12 md:-mt-16 border-b border-neutral-100">
+          <Image
+            src="/bombay-banner.jpg"
+            alt="Bombay Sapphire Banner"
+            width={2880}
+            height={1200}
+            className="w-full h-auto object-contain"
+            priority
+          />
+        </div>
+      )}
+
       <div className="w-full px-6 md:px-[40px] lg:px-[56px] relative z-10">
         {/* BREADCRUMBS - Industrial Small */}
         <div className="flex items-center gap-2 text-[9px] font-black uppercase tracking-[0.2em] text-neutral-400 mb-12 px-2">
@@ -240,11 +306,10 @@ export default function ProductDetailsPage() {
                       key={idx}
                       onMouseEnter={() => setActiveImage(idx)}
                       onClick={() => setActiveImage(idx)}
-                      className={`relative aspect-square w-full transition-all duration-300 border ${
-                        activeImage === idx
+                      className={`relative aspect-square w-full transition-all duration-300 border ${activeImage === idx
                           ? "border-black shadow-lg"
                           : "border-transparent opacity-40 hover:opacity-100"
-                      }`}
+                        }`}
                     >
                       <Image src={img} alt="" fill className="object-cover" />
                     </button>
@@ -259,7 +324,7 @@ export default function ProductDetailsPage() {
                 onMouseMove={handleZoomMove}
                 onMouseEnter={handleZoomEnter}
                 onMouseLeave={handleZoomLeave}
-                style={{ cursor: isZooming ? "crosshair" : "default" }}
+                style={{ cursor: isZooming ? "zoom-in" : "default" }}
               >
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -359,7 +424,7 @@ export default function ProductDetailsPage() {
                   </span>
                   <span className="h-[1px] flex-1 bg-neutral-100"></span>
                 </div>
-                <h1 className="text-4xl md:text-4xl font-black lowercase tracking-tighter leading-none text-black">
+                <h1 className="text-3xl md:text-5xl font-black uppercase leading-none text-black drop-shadow-[2px_2px_0px_#e5e5e5] md:drop-shadow-[4px_4px_0px_#e5e5e5]">
                   {product.name}
                 </h1>
 
@@ -468,11 +533,10 @@ export default function ProductDetailsPage() {
                         key={size}
                         type="button"
                         onClick={() => setValue("size", size)}
-                        className={`w-12 h-12 text-[10px] font-black transition-all duration-300 border ${
-                          selectedSize === size
+                        className={`w-12 h-12 text-[10px] font-black transition-all duration-300 border ${selectedSize === size
                             ? "bg-black border-black text-white"
                             : "bg-white border-neutral-100 text-neutral-400 hover:border-black hover:text-black"
-                        }`}
+                          }`}
                       >
                         {size}
                       </button>
@@ -490,23 +554,22 @@ export default function ProductDetailsPage() {
                   <button
                     type="submit"
                     disabled={isOutOfStock}
-                    className="w-full bg-black text-white py-6 rounded-none text-[10px] font-black uppercase tracking-[0.4em] transition-all flex items-center justify-center gap-4 group overflow-hidden relative"
+                    className="w-full bg-black text-white py-4 md:py-5 border-2 border-black text-sm font-black uppercase tracking-widest shadow-[4px_4px_0px_#e5e5e5] hover:-translate-y-1 transition-transform active:translate-y-0 active:shadow-none flex items-center justify-center gap-2"
                   >
-                    <div className="absolute inset-0 bg-neutral-900 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
-                    <span className="relative z-10">
-                      {isOutOfStock ? "Sold Out" : "Add to Cart"}
+                    <span>
+                      {isOutOfStock ? "SOLD OUT" : "ADD TO CART"}
                     </span>
                   </button>
 
                   <button
                     type="button"
                     onClick={() => setIsWishlisted(!isWishlisted)}
-                    className="w-full bg-white text-black py-5 rounded-none text-[9px] font-black uppercase tracking-[0.2em] border border-neutral-200 hover:border-black transition-all flex items-center justify-center gap-2"
+                    className="w-full bg-transparent text-black py-4 border-2 border-black text-xs font-black uppercase tracking-widest hover:bg-black hover:text-white transition-colors duration-300 flex items-center justify-center gap-2"
                   >
                     <Heart
-                      className={`w-3 h-3 ${isWishlisted ? "fill-black" : ""}`}
+                      className={`w-4 h-4 ${isWishlisted ? "fill-current" : ""}`}
                     />
-                    {isWishlisted ? "In Archive" : "Archive Item"}
+                    {isWishlisted ? "IN ARCHIVE" : "ARCHIVE ITEM"}
                   </button>
                 </div>
               </form>
@@ -629,11 +692,10 @@ export default function ProductDetailsPage() {
 
         {/* RELATED DROPS - Clean Square */}
         <div className="mt-20 space-y-12">
-          <div className="flex flex-col items-start gap-2 max-w-sm">
-            <h2 className="text-2xl font-black uppercase tracking-widest text-neutral-300">
-              Related Drop
+          <div className="flex flex-col items-start gap-2 mb-4">
+            <h2 className="text-2xl md:text-4xl font-black uppercase text-black leading-none drop-shadow-[2px_2px_0px_#e5e5e5] whitespace-nowrap">
+              RELATED DROPS
             </h2>
-            <div className="h-[2px] w-12 bg-black" />
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {relatedProducts.map((p) => (

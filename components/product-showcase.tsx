@@ -101,25 +101,21 @@ export function ProductShowcase() {
                       sizes="(max-width: 768px) 100vw, 25vw"
                     />
                   )}
-                  {/* Floating badges */}
-                  <div className="absolute top-2 left-2 bg-white text-black text-[9px] font-bold uppercase px-2 py-1 tracking-widest">
-                    {product.isSale ? "SALE" : "HOT"}
-                  </div>
                 </div>
               </Link>
 
               {/* Product Info & Button */}
               <div className="flex flex-col grow px-1">
                 <Link href={`/product/${product.id}`} className="block mb-4">
-                  <h3 className="text-[11px] md:text-xs font-semibold uppercase text-black tracking-wider mb-1 truncate">
+                  <h3 className="text-[10px] md:text-[10px] font-bold uppercase text-black tracking-[0.15em] mb-1 truncate">
                     {product.name}
                   </h3>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[14px] md:text-base font-black text-black/60 group-hover:text-black transition-colors">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[11px] md:text-xs font-black tracking-widest text-black/80 group-hover:text-black transition-colors">
                       ₹{product.price.toLocaleString()}
                     </span>
                     {product.originalPrice && (
-                      <span className="text-[11px] md:text-xs text-neutral-400 line-through font-bold">
+                      <span className="text-[9px] md:text-[10px] text-neutral-400 line-through tracking-widest font-medium">
                         ₹{product.originalPrice.toLocaleString()}
                       </span>
                     )}

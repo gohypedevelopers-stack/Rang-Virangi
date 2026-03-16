@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -37,14 +38,16 @@ export function LoveBanner() {
       className="w-full relative overflow-hidden bg-black"
     >
       <div className="relative w-full love-banner-image">
-        <Image
-          src="/love-robot-banner.png"
-          alt="Love Simulation Collection"
-          width={2880}
-          height={1400}
-          className="w-full h-auto object-contain"
-          priority
-        />
+        <Link href="/product/998" className="block cursor-pointer">
+          <Image
+            src="/love-robot-banner.png"
+            alt="Love Simulation Collection"
+            width={2880}
+            height={1400}
+            className="w-full h-auto object-contain transition-transform duration-500 hover:scale-[1.02]"
+            priority
+          />
+        </Link>
       </div>
     </section>
   );

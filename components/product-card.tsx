@@ -35,16 +35,10 @@ export function ProductCard({
           />
 
           {/* Badge Overlay */}
-          {isOutOfStock ? (
+          {isOutOfStock && (
             <span className="absolute top-2 left-2 bg-neutral-200 text-neutral-600 text-[12px] font-bold px-3 py-1 uppercase z-10 tracking-wider">
               Sold Out
             </span>
-          ) : (
-            product.isSale && (
-              <span className="absolute top-2 left-2 bg-black text-white border border-white shadow-lg text-[14px] font-bold px-2 py-1 uppercase z-10">
-                Sale
-              </span>
-            )
           )}
 
           {topRightAction && (
@@ -60,25 +54,25 @@ export function ProductCard({
 
         {/* Product Details */}
         <div className={`space-y-1 ${centeredText ? "text-center" : ""}`}>
-          <h3 className="text-black text-xs md:text-sm font-medium uppercase tracking-wide leading-tight line-clamp-1">
+          <h3 className="text-[10px] md:text-[10px] font-bold uppercase text-black tracking-[0.15em] leading-tight line-clamp-1">
             {product.name}
           </h3>
           {product.variant && (
-            <p className="text-neutral-500 text-[10px] uppercase tracking-wide">
+            <p className="text-neutral-400 text-[9px] uppercase tracking-[0.2em] mb-1">
               {product.variant}
             </p>
           )}
           <div
-            className={`flex items-center gap-2 pt-1 mb-5 ${centeredText ? "justify-center" : ""}`}
+            className={`flex items-center gap-3 pt-1 mb-5 ${centeredText ? "justify-center" : ""}`}
           >
+            <span className="text-[11px] md:text-xs font-black tracking-widest text-black/80 group-hover:text-black transition-colors">
+              ₹{product.price.toLocaleString()}
+            </span>
             {product.originalPrice && (
-              <span className="text-neutral-400 text-[11px] md:text-xs line-through font-bold">
+              <span className="text-[9px] md:text-[10px] text-neutral-400 line-through tracking-widest font-medium">
                 ₹{product.originalPrice.toLocaleString()}
               </span>
             )}
-            <span className="text-[14px] md:text-base font-black text-black/60 group-hover:text-black transition-colors">
-              ₹{product.price.toLocaleString()}
-            </span>
           </div>
           {footerAction && <div className="mt-auto">{footerAction}</div>}
         </div>

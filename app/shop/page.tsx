@@ -239,12 +239,11 @@ export default function ShopPage() {
 
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-neutral-200">
           <div>
-            <h1 className="text-4xl md:text-6xl font-black tracking-tight uppercase">
-              Shop Collection
+            <h1 className="text-4xl md:text-6xl font-black uppercase text-black leading-none drop-shadow-[2px_2px_0px_#e5e5e5] md:drop-shadow-[4px_4px_0px_#e5e5e5] tracking-tighter">
+              THE ARCHIVE
             </h1>
-            <p className="text-neutral-500 font-medium mt-2 max-w-lg">
-              Elevate your everyday wardrobe with our premium essentials crafted
-              from sustainable bamboo cotton.
+            <p className="text-neutral-500 text-[10px] md:text-xs font-bold uppercase tracking-[0.15em] mt-4 max-w-lg">
+              THE COMPLETE CATALOG. PREMIUM HEAVYWEIGHT BASICS AND LIMITED-RUN GRAPHICS CRAFTED FOR EXCELLENCE.
             </p>
           </div>
 

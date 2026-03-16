@@ -152,11 +152,6 @@ export function TopSelling() {
                   />
                   <div className="absolute inset-0 bg-linear-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-                  {/* Tag */}
-                  <span className="absolute top-3 left-3 bg-black text-white text-[8px] md:text-[9px] font-bold px-2.5 py-1 uppercase tracking-wider">
-                    {item.tag}
-                  </span>
-
                   {/* Hover overlay */}
                   <div className="absolute bottom-0 left-0 right-0 p-4 translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
                     <p className="text-white text-sm font-black tracking-wide uppercase">
@@ -169,7 +164,7 @@ export function TopSelling() {
                 </div>
 
                 <div className="mt-2.5 px-0.5">
-                  <h3 className="text-black text-xs font-bold uppercase tracking-wider truncate">
+                  <h3 className="text-black text-[10px] md:text-[10px] font-bold uppercase tracking-[0.15em] truncate">
                     {item.name}
                   </h3>
                 </div>

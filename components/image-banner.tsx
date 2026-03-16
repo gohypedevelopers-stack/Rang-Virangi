@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -40,14 +41,17 @@ export function ImageBanner() {
     >
       {/* Banner container - maintain original aspect ratio to avoid clipping */}
       <div className="relative w-full overflow-hidden flex items-center justify-center">
-        <Image
-          src={bannerImg}
-          alt="Love and Sugar Daddy Artwork"
-          width={1920}
-          height={1080}
-          className="w-full h-auto"
-          priority
-        />
+        <Link href="/product/997" className="block cursor-pointer w-full">
+          <Image
+            ref={imageRef}
+            src={bannerImg}
+            alt="Love and Sugar Daddy Artwork"
+            width={1920}
+            height={1080}
+            className="w-full h-auto transition-transform duration-500 hover:scale-[1.02]"
+            priority
+          />
+        </Link>
 
         {/* Subtle gradient overlay to tie it into the dark theme */}
         <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-black/20 pointer-events-none" />

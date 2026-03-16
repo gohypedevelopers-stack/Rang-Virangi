@@ -5,7 +5,8 @@ import gsap from "gsap";
 import { cn } from "@/lib/utils";
 
 interface TextMarqueeProps {
-  text: string;
+  text?: string;
+  children?: React.ReactNode;
   className?: string;
   direction?: "left" | "right";
   speed?: number; // duration in seconds for one full cycle
@@ -13,6 +14,7 @@ interface TextMarqueeProps {
 
 export function TextMarquee({
   text,
+  children,
   className,
   direction = "left",
   speed = 20,
@@ -66,7 +68,7 @@ export function TextMarquee({
           {/* Repeat text multiple times to ensure it fills screen if short */}
           {[...Array(16)].map((_, i) => (
             <span key={`1-${i}`} className="mx-6">
-              {text}
+              {children || text}
             </span>
           ))}
         </div>
@@ -74,7 +76,7 @@ export function TextMarquee({
         <div className="flex shrink-0 items-center">
           {[...Array(16)].map((_, i) => (
             <span key={`2-${i}`} className="mx-6">
-              {text}
+              {children || text}
             </span>
           ))}
         </div>

@@ -2,48 +2,39 @@
 
 import React, { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import {
-  useGLTF,
-  Stage,
-  PresentationControls,
-  Environment,
-} from "@react-three/drei";
+import { useGLTF, Stage, Environment } from "@react-three/drei";
 import * as THREE from "three";
 
 function Model({ url }: { url: string }) {
   const { scene } = useGLTF(url);
-  const autoRotateRef = useRef<THREE.Group>(null);
   const mouseTiltRef = useRef<THREE.Group>(null);
 
   useFrame((state) => {
-    if (autoRotateRef.current) {
-      // Very slow continuous base rotation to not interfere with user
-      autoRotateRef.current.rotation.y += 0.01;
-    }
-
     if (mouseTiltRef.current) {
-      // Subtle mouse influence (tilting)
-      const targetRotationX = -state.mouse.y * 0.1;
-      const targetRotationY = state.mouse.x * 0.1;
+      // 1. Direct mapping of mouse to rotation.
+      // Setting rotation multiplier higher than Math.PI (3.14) to achieve 180+ degrees
+      // of rotation when the cursor hits the extreme top or bottom of the screen.
+      const targetRotationX = -state.mouse.y * 3.5; // Up/down tilt 180+
+      const targetRotationY = state.mouse.x * 3.5;  // Left/right tilt 180+
 
+      // Increased interpolation factor (0.15 -> 0.3) for a much faster,
+      // more responsive snap tracking your cursor from slow to fast movements.
       mouseTiltRef.current.rotation.x = THREE.MathUtils.lerp(
         mouseTiltRef.current.rotation.x,
         targetRotationX,
-        0.1
+        0.3
       );
       mouseTiltRef.current.rotation.y = THREE.MathUtils.lerp(
         mouseTiltRef.current.rotation.y,
         targetRotationY,
-        0.1
+        0.3
       );
     }
   });
 
   return (
     <group ref={mouseTiltRef}>
-      <group ref={autoRotateRef}>
-        <primitive object={scene} scale={3} rotation={[0, 0, 0]} />
-      </group>
+      <primitive object={scene} scale={3} rotation={[0, 0, 0]} />
     </group>
   );
 }
@@ -57,20 +48,9 @@ export default function CoinModel() {
         gl={{ antialias: true }}
       >
         <Suspense fallback={null}>
-          <PresentationControls
-            speed={5.0} // High speed for immediate response while dragging
-            global={true}
-            cursor={true}
-            snap={false}
-            // @ts-ignore - config is supported by drei but may have type issues in some versions
-            config={{ mass: 1, tension: 300, friction: 10 }} // Low mass and friction for "free" movement
-            polar={[-Infinity, Infinity]}
-            azimuth={[-Infinity, Infinity]}
-          >
-            <Stage environment="city" intensity={0.5} adjustCamera={false}>
-              <Model url="/rv.glb" />
-            </Stage>
-          </PresentationControls>
+          <Stage environment="city" intensity={0.5} adjustCamera={false}>
+            <Model url="/rv.glb" />
+          </Stage>
         </Suspense>
       </Canvas>
     </div>

@@ -40,14 +40,7 @@ export default function AboutPage() {
                 </div>
             </div>
 
-            {/* Marquee */}
-            <div className="py-6 bg-black -rotate-2 border-y-4 border-neutral-200 z-10 relative mb-20 md:mb-32 scale-105 shadow-2xl">
-                <TextMarquee
-                    text="OUR STORY • OUR VISION • PREMIUM FABRICS • SUSTAINABLE LUXURY • CRAFTED WITH LOVE • "
-                    className="text-4xl md:text-6xl font-black text-white uppercase tracking-wider"
-                    speed={20}
-                />
-            </div>
+
 
             {/* Main Story Content */}
             <div className="container mx-auto px-6 relative z-10 max-w-4xl mb-32">

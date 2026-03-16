@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -37,14 +38,16 @@ export function CultureBanner() {
       className="w-full relative overflow-hidden bg-neutral-200"
     >
       <div className="relative w-full culture-banner-image">
-        <Image
-          src="/culture-banner.png"
-          alt="Rang Virangi Culture Symphony Tour"
-          width={2880}
-          height={960}
-          className="w-full h-auto object-contain"
-          priority
-        />
+        <Link href="/product/996" className="block cursor-pointer">
+          <Image
+            src="/culture-banner.png"
+            alt="Rang Virangi Culture Symphony Tour"
+            width={2880}
+            height={960}
+            className="w-full h-auto object-contain transition-transform duration-500 hover:scale-[1.02]"
+            priority
+          />
+        </Link>
       </div>
     </section>
   );

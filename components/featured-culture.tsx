@@ -98,9 +98,8 @@ export function FeaturedCulture() {
                 SYMPHONY
               </span>
             </h2>
-            <p className="max-w-xl mt-4 text-neutral-600 font-bold uppercase tracking-widest text-sm md:text-base">
-              A tribute to the legends. High density digital print on premium
-              240GSM cotton.
+            <p className="max-w-xl mt-4 text-neutral-500 font-bold uppercase tracking-[0.15em] text-xs md:text-xs">
+              THE LEGENDS. HIGH DENSITY DIGITAL PRINT. 240 GSM COTTON.
             </p>
           </div>
 
@@ -133,9 +132,6 @@ export function FeaturedCulture() {
                     className="object-cover transition-transform duration-700 group-hover:scale-105"
                     sizes="(max-width: 768px) 50vw, 25vw"
                   />
-                  <div className="absolute top-2 left-2 bg-white text-black text-[9px] font-bold uppercase px-2 py-1 tracking-widest">
-                    SALE
-                  </div>
                 </div>
               </Link>
               <div className="flex flex-col grow px-1">
@@ -143,14 +139,14 @@ export function FeaturedCulture() {
                   href={`/product/${cultureProduct.id}`}
                   className="block mb-4"
                 >
-                  <h3 className="text-[11px] md:text-xs font-semibold uppercase text-black tracking-wider mb-1 truncate">
+                  <h3 className="text-[10px] md:text-[10px] font-bold uppercase text-black tracking-[0.15em] mb-1 truncate">
                     {product.label}
                   </h3>
-                  <div className="flex items-center gap-2">
-                    <span className="text-[14px] md:text-base font-black text-black/60 group-hover:text-black transition-colors">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[11px] md:text-xs font-black tracking-widest text-black/80 group-hover:text-black transition-colors">
                       ₹1,202
                     </span>
-                    <span className="text-[11px] md:text-xs text-neutral-400 line-through font-bold">
+                    <span className="text-[9px] md:text-[10px] text-neutral-400 line-through tracking-widest font-medium">
                       ₹1,999
                     </span>
                   </div>
