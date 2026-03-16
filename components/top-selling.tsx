@@ -11,31 +11,31 @@ gsap.registerPlugin(ScrollTrigger, Draggable);
 
 const topSellers = [
   {
-    id: 14,
+    id: 4,
     name: "Sugar Daddy",
     image: "/products/sugar-daddy-navy-tee-back.jpeg",
     tag: "BEST SELLER",
   },
   {
-    id: 6,
+    id: 7,
     name: "Rage Tiger",
     image: "/products/tiger-tshirt.jpeg",
     tag: "TRENDING",
   },
   {
-    id: 13,
+    id: 9,
     name: "Fangs Before Feelings",
     image: "/products/blue-lips-navy-tee-back.jpeg",
     tag: "NEW",
   },
   {
-    id: 5,
+    id: 10,
     name: "Apsara Aura",
     image: "/products/apsara-aura-black-tee-back.jpeg",
     tag: "HOT",
   },
   {
-    id: 12,
+    id: 5,
     name: "Robosexual",
     image: "/products/bombay-sapphire-sage-tee-back.jpeg",
     tag: "POPULAR",

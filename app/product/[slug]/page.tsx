@@ -231,7 +231,7 @@ export default function ProductDetailsPage() {
       </div>
 
       {/* PRODUCT SPECIFIC HERO BANNERS */}
-      {slug === "996" && (
+      {slug === "1" && (
         <div className="w-full mb-12 -mt-12 md:-mt-16 border-b border-neutral-100">
           <Image
             src="/culture-banner.png"
@@ -243,7 +243,7 @@ export default function ProductDetailsPage() {
           />
         </div>
       )}
-      {slug === "997" && (
+      {slug === "4" && (
         <div className="w-full mb-12 -mt-12 md:-mt-16 border-b border-neutral-100">
           <Image
             src="/sugar-daddy-banner.png"
@@ -255,7 +255,7 @@ export default function ProductDetailsPage() {
           />
         </div>
       )}
-      {slug === "998" && (
+      {slug === "5" && (
         <div className="w-full mb-12 -mt-12 md:-mt-16 border-b border-neutral-100">
           <Image
             src="/love-robot-banner.png"
@@ -267,7 +267,7 @@ export default function ProductDetailsPage() {
           />
         </div>
       )}
-      {(slug === "999" || slug === "12") && (
+      {slug === "6" && (
         <div className="w-full mb-12 -mt-12 md:-mt-16 border-b border-neutral-100">
           <Image
             src="/bombay-banner.jpg"
