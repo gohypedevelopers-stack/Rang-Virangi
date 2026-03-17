@@ -118,11 +118,11 @@ export function Navbar() {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 w-full z-50 py-3 pl-6 pr-[2px] md:py-3 md:px-6 transition-all duration-300 backdrop-blur-md shadow-sm ${
+      className={`fixed top-0 left-0 w-full z-50 py-3 px-6 transition-all duration-300 backdrop-blur-md shadow-sm ${
         isScrolled ? "bg-black/95 text-white" : "bg-white text-black"
       }`}
     >
-      <div className="mx-auto flex items-center justify-between relative w-full pr-0 md:px-4 lg:px-8">
+      <div className="mx-auto flex items-center justify-between relative w-full md:px-4 lg:px-8">
         {/* Mobile Hamburger Menu Icon */}
         <div className="flex-1 flex justify-start">
           <button
@@ -136,7 +136,7 @@ export function Navbar() {
 
         {/* Logo Section */}
         <div
-          className="shrink-0 flex-1 lg:flex-none flex justify-start lg:absolute lg:left-1/2 lg:-translate-x-1/2"
+          className="shrink-0 flex-1 lg:flex-none flex justify-center lg:absolute lg:left-1/2 lg:-translate-x-1/2"
           ref={logoRef}
         >
           <Link href="/" className="flex items-center">

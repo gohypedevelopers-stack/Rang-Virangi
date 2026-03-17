@@ -13,10 +13,10 @@ export function FeaturedLook() {
   const { addToCart } = useCart();
 
   const bombayProduct = {
-    id: 999,
+    id: 6,
     name: "Bombay Sapphire Edition Tee",
     variant: "WHITE",
-    price: 909,
+    price: 1599,
     originalPrice: 1999,
     image: "/artwork.jpg",
     isSale: true,
