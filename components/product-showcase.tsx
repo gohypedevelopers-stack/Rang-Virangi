@@ -4,10 +4,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { products } from "@/lib/products";
 import { useCart } from "@/context/cart-context";
-import { ShoppingCart } from "lucide-react";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Plus, ArrowLeft, ArrowRight, Bookmark } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,8 +15,8 @@ export function ProductShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const { addToCart } = useCart();
 
-  // We now show all products for the home page showcase
-  const displayedProducts = products;
+  // We now show 8 products for the home page showcase
+  const displayedProducts = products.slice(0, 8);
 
   const handleAddToCart = (
     e: React.MouseEvent,
@@ -34,14 +34,13 @@ export function ProductShowcase() {
       // Card entrance animation
       gsap.fromTo(
         ".product-card",
-        { y: 100, opacity: 0, rotate: -3 },
+        { y: 50, opacity: 0 },
         {
           y: 0,
           opacity: 1,
-          rotate: 0,
           duration: 0.8,
-          stagger: 0.15,
-          ease: "back.out(1.5)",
+          stagger: 0.1,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 75%",
@@ -55,41 +54,41 @@ export function ProductShowcase() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-white pt-4 md:pt-10 pb-20 relative overflow-hidden"
+      className="w-full bg-[#f8f8f8] pt-10 pb-20 relative overflow-hidden"
     >
-      <div className="container mx-auto px-4 md:px-8 mt-4 md:mt-6">
-        <div className="flex flex-row justify-between items-center mb-8 relative z-10 gap-4">
-          <h2 className="text-2xl md:text-5xl font-black uppercase text-black leading-none drop-shadow-[2px_2px_0px_#e5e5e5] md:drop-shadow-[4px_4px_0px_#e5e5e5] whitespace-nowrap">
-            THE COLLECTION
-          </h2>
+      <div className="w-full px-4 md:px-6">
+        {/* Editorial Header */}
+        <div className="flex flex-row justify-between items-center mb-12 relative z-10 gap-4">
+          <div className="bg-black text-white px-6 py-2">
+            <h2 className="text-xl md:text-3xl font-black uppercase tracking-tight leading-none">
+              THE COLLECTION
+            </h2>
+          </div>
+          
           <Link
             href="/shop"
-            className="group flex flex-none items-center gap-1 md:gap-2 bg-black text-white px-3 md:px-8 py-2 md:py-4 rounded-full font-black uppercase text-[10px] md:text-base tracking-widest hover:-translate-y-1 transition-transform cursor-pointer shadow-[3px_3px_0px_#e5e5e5] md:shadow-[6px_6px_0px_#e5e5e5] border-2 border-black"
+            className="group flex items-center gap-3 bg-black text-white px-8 py-3.5 rounded-full font-black uppercase text-xs tracking-widest hover:bg-neutral-800 transition-all cursor-pointer"
           >
             <span>Shop All </span>
-            <span className="text-sm md:text-2xl leading-none group-hover:rotate-45 transition-transform">
+            <span className="text-xl leading-none group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">
               ↗
             </span>
           </Link>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-2">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {displayedProducts.map((product) => (
             <div
               key={product.id}
-              className="product-card group relative bg-white flex flex-col pb-4"
+              className="product-card group relative bg-[#f0f0f0] flex flex-col p-2.5 rounded-xl transition-all"
             >
-              <Link
-                href={`/product/${product.id}`}
-                className="block relative grow mb-3"
-              >
-                {/* Image Container */}
-                <div className="relative aspect-3/4 overflow-hidden bg-neutral-100 mb-0 z-0">
+              <div className="relative aspect-[3/4] overflow-hidden bg-neutral-200 rounded-lg mb-4 z-0">
+                <Link href={`/product/${product.id}`} className="block w-full h-full">
                   <Image
                     src={product.image}
                     alt={product.name}
                     fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    className="object-cover transition-transform duration-1000"
                     sizes="(max-width: 768px) 100vw, 25vw"
                   />
                   {product.backImage && (
@@ -97,41 +96,42 @@ export function ProductShowcase() {
                       src={product.backImage}
                       alt={product.name}
                       fill
-                      className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-500 absolute inset-0"
+                      className="object-cover opacity-0 group-hover:opacity-100 transition-opacity duration-700 absolute inset-0"
                       sizes="(max-width: 768px) 100vw, 25vw"
                     />
                   )}
-                </div>
-              </Link>
-
-              {/* Product Info & Button */}
-              <div className="flex flex-col grow px-1">
-                <Link href={`/product/${product.id}`} className="block mb-4">
-                  <h3 className="text-[10px] md:text-[10px] font-bold uppercase text-black tracking-[0.15em] mb-1 truncate">
-                    {product.name}
-                  </h3>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[11px] md:text-xs font-black tracking-widest text-black/80 group-hover:text-black transition-colors">
-                      ₹{product.price.toLocaleString()}
-                    </span>
-                    {product.originalPrice && (
-                      <span className="text-[9px] md:text-[10px] text-neutral-400 line-through tracking-widest font-medium">
-                        ₹{product.originalPrice.toLocaleString()}
-                      </span>
-                    )}
-                  </div>
                 </Link>
 
-                <div className="mt-auto">
-                  {/* Add to Cart Button */}
-                  <button
-                    onClick={(e) => handleAddToCart(e, product)}
-                    className="w-full bg-transparent text-black border border-black text-[10px] md:text-xs uppercase py-2.5 tracking-widest hover:bg-black hover:text-white transition-colors duration-300 flex justify-center items-center gap-2"
-                  >
-                    <ShoppingCart className="w-3.5 h-3.5" />
-                    <span>Add To Cart</span>
-                  </button>
+                {/* Pagination Dots - ONLY IF BACK IMAGE EXISTS */}
+                {product.backImage && (
+                  <div className="absolute bottom-4 left-0 right-0 z-10 flex justify-center gap-1.5 pointer-events-none">
+                    {[0, 1].map((i) => (
+                      <div 
+                        key={i} 
+                        className={`w-1.2 h-1.2 rounded-full bg-white transition-all duration-300 ${i === 0 ? "opacity-100 scale-125" : "opacity-30"}`} 
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Product Info & Button */}
+              <div className="flex flex-row items-end justify-between w-full px-1 mb-1">
+                <div className="flex flex-col gap-0.5">
+                  <h3 className="text-[10px] md:text-[11px] font-bold uppercase text-neutral-800 tracking-tight leading-tight truncate max-w-[130px]">
+                    {product.name}
+                  </h3>
+                  <p className="text-[10px] font-bold text-neutral-500">
+                    RS. {product.price.toLocaleString()}
+                  </p>
                 </div>
+
+                <button
+                  onClick={(e) => handleAddToCart(e, product)}
+                  className="group hover:bg-black rounded-full transition-all p-0.5"
+                >
+                  <Plus className="w-4 h-4 text-neutral-600 group-hover:text-white" strokeWidth={1.5} />
+                </button>
               </div>
             </div>
           ))}

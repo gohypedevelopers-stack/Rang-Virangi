@@ -35,16 +35,15 @@ export function BombayBanner() {
   return (
     <section
       ref={sectionRef}
-      className="w-full relative overflow-hidden bg-[#5eb4ae]"
+      className="w-full h-full relative overflow-hidden bg-[#5eb4ae]"
     >
-      <div className="relative w-full bombay-banner-image">
-        <Link href="/product/6" className="block cursor-pointer">
+      <div className="relative w-full h-full bombay-banner-image">
+        <Link href="/product/6" className="block cursor-pointer w-full h-full">
           <Image
             src="/bombay-banner.jpg"
             alt="Bombay Sapphire Botanical Symphony"
-            width={2880}
-            height={1200}
-            className="w-full h-auto object-contain transition-transform duration-500 hover:scale-[1.02]"
+            fill
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
             priority
           />
         </Link>

@@ -37,18 +37,17 @@ export function ImageBanner() {
   return (
     <section
       ref={sectionRef}
-      className="w-full relative overflow-hidden bg-black"
+      className="w-full h-full relative overflow-hidden bg-black"
     >
       {/* Banner container - maintain original aspect ratio to avoid clipping */}
-      <div className="relative w-full overflow-hidden flex items-center justify-center">
-        <Link href="/product/4" className="block cursor-pointer w-full">
+      <div className="relative w-full h-full overflow-hidden flex items-center justify-center">
+        <Link href="/product/4" className="block cursor-pointer w-full h-full">
           <Image
             ref={imageRef}
             src={bannerImg}
             alt="Love and Sugar Daddy Artwork"
-            width={1920}
-            height={1080}
-            className="w-full h-auto transition-transform duration-500 hover:scale-[1.02]"
+            fill
+            className="object-cover transition-transform duration-500 hover:scale-[1.02]"
             priority
           />
         </Link>

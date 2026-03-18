@@ -35,16 +35,15 @@ export function CultureBanner() {
   return (
     <section
       ref={sectionRef}
-      className="w-full relative overflow-hidden bg-neutral-200"
+      className="w-full h-full relative overflow-hidden bg-neutral-200"
     >
-      <div className="relative w-full culture-banner-image">
-        <Link href="/product/1" className="block cursor-pointer">
+      <div className="relative w-full h-full culture-banner-image">
+        <Link href="/product/1" className="block cursor-pointer w-full h-full">
           <Image
             src="/culture-banner.png"
             alt="Rang Virangi Culture Symphony Tour"
-            width={2880}
-            height={960}
-            className="w-full h-auto object-contain transition-transform duration-500 hover:scale-[1.02]"
+            fill
+            className="w-full h-full object-cover transition-transform duration-500 hover:scale-[1.02]"
             priority
           />
         </Link>

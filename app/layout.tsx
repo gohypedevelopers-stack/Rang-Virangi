@@ -3,6 +3,7 @@ import { Navbar } from "../components/navbar";
 import { Footer } from "../components/ui/large-name-footer";
 import { CartProvider } from "../context/cart-context";
 import { CartSidebar } from "../components/cart-sidebar";
+import { SmoothScrolling } from "../components/smooth-scrolling";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,12 +20,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-background text-foreground antialiased min-h-screen flex flex-col overflow-x-hidden">
-        <CartProvider>
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
-          <CartSidebar />
-        </CartProvider>
+        <SmoothScrolling>
+          <CartProvider>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+            <CartSidebar />
+          </CartProvider>
+        </SmoothScrolling>
       </body>
     </html>
   );

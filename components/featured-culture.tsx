@@ -87,84 +87,57 @@ export function FeaturedCulture() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-white text-black py-12 md:py-24 relative overflow-hidden"
+      className="w-full bg-neutral-100 text-black py-20 px-4 md:px-8 relative overflow-hidden"
     >
-      <div className="container mx-auto px-4 md:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-6 featured-culture-image border-b-[3px] border-black pb-8">
-          <div>
-            <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-none drop-shadow-[2px_2px_0px_#e5e5e5] md:drop-shadow-[4px_4px_0px_#e5e5e5] tracking-tighter">
-              CULTURE{" "}
-              <span className="font-caesar italic tracking-normal">
-                SYMPHONY
-              </span>
-            </h2>
-            <p className="max-w-xl mt-4 text-neutral-500 font-bold uppercase tracking-[0.15em] text-xs md:text-xs">
-              THE LEGENDS. HIGH DENSITY DIGITAL PRINT. 240 GSM COTTON.
-            </p>
-          </div>
-
-          <Link
-            href={`/product/${cultureProduct.id}`}
-            className="group flex flex-none items-center gap-2 bg-black text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-black uppercase text-sm md:text-base tracking-widest hover:-translate-y-1 transition-transform cursor-pointer shadow-[3px_3px_0px_#e5e5e5] md:shadow-[6px_6px_0px_#e5e5e5] border-2 border-black"
-          >
-            <span>Shop Edition </span>
-            <span className="text-xl leading-none group-hover:rotate-45 transition-transform">
-              ↗
-            </span>
-          </Link>
+      <div className="container mx-auto">
+        <div className="flex flex-col mb-16 relative z-10">
+          <p className="text-[10px] text-black/40 uppercase tracking-[0.5em] mb-4 font-bold">
+            The Artistic Tour
+          </p>
+          <h2 className="text-4xl md:text-7xl lg:text-8xl font-light uppercase text-black leading-tight tracking-[0.3em] drop-shadow-sm">
+            CULTURE <br />
+            <span className="font-extrabold text-neutral-400">SYMPHONY</span>
+          </h2>
+          <p className="max-w-xl mt-8 text-black/60 font-medium uppercase tracking-widest text-xs md:text-sm border-l-2 border-black/10 pl-6 italic">
+            A symphony of subcultures and urban rhythms. Merging high-definition 
+            graphics with heavyweight luxury cotton.
+          </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-2">
-          {products.map((product, i) => (
-            <div
-              key={i}
-              className="featured-culture-image product-card group relative bg-white flex flex-col pb-4"
-            >
-              <Link
-                href={`/product/${cultureProduct.id}`}
-                className="block relative grow mb-3"
-              >
-                <div className="relative aspect-3/4 overflow-hidden bg-neutral-100 mb-0 z-0">
-                  <Image
-                    src={product.src}
-                    alt={product.alt}
-                    fill
-                    className="object-cover transition-transform duration-700 group-hover:scale-105"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                  />
-                </div>
-              </Link>
-              <div className="flex flex-col grow px-1">
-                <Link
-                  href={`/product/${cultureProduct.id}`}
-                  className="block mb-4"
-                >
-                  <h3 className="text-[10px] md:text-[10px] font-bold uppercase text-black tracking-[0.15em] mb-1 truncate">
-                    {product.label}
-                  </h3>
-                  <div className="flex items-center gap-3">
-                    <span className="text-[11px] md:text-xs font-black tracking-widest text-black/80 group-hover:text-black transition-colors">
-                      ₹1,202
-                    </span>
-                    <span className="text-[9px] md:text-[10px] text-neutral-400 line-through tracking-widest font-medium">
-                      ₹1,999
-                    </span>
-                  </div>
-                </Link>
-                <div className="mt-auto">
-                  <button
-                    onClick={handleAddToCart}
-                    className="w-full bg-transparent text-black border border-black text-[10px] md:text-xs uppercase py-2.5 tracking-widest hover:bg-black hover:text-white transition-colors duration-300 flex justify-center items-center gap-2"
-                  >
-                    <ShoppingCart className="w-3.5 h-3.5" />
-                    <span>Add To Cart</span>
-                  </button>
-                </div>
-              </div>
+        {/* 4-Image Aesthetic Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 scroll-reveal">
+          {[
+            "/culture-white-front.jpg",
+            "/culture-white-back.jpg",
+            "/culture-navy-back.jpg",
+            "/culture-black-back.jpg",
+          ].map((src, idx) => (
+            <div key={idx} className="group relative aspect-[3/4] overflow-hidden bg-white featured-culture-image shadow-sm border border-black/5">
+              <Image
+                src={src}
+                alt={`Culture Symphony - View ${idx + 1}`}
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-110"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+              <div className="absolute inset-0 bg-black/5 group-hover:bg-black/0 transition-colors duration-500" />
             </div>
           ))}
         </div>
+
+        <div className="mt-16">
+          <Link
+            href="/product/1"
+            className="group inline-flex items-center gap-6 border-b-2 border-black pb-2 font-bold uppercase text-xs md:text-sm tracking-[0.4em] hover:text-neutral-500 transition-colors cursor-pointer"
+          >
+            <span>Browse Full Edition</span>
+            <span className="text-xl leading-none group-hover:translate-x-2 transition-transform">
+              →
+            </span>
+          </Link>
+        </div>
       </div>
     </section>
+
   );
 }

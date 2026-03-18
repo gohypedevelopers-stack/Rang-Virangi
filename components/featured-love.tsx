@@ -60,81 +60,60 @@ export function FeaturedLove() {
   return (
     <section
       ref={sectionRef}
-      className="w-full bg-neutral-50 text-black py-12 md:py-24 relative overflow-hidden"
+      className="w-full bg-black text-white py-20 px-4 md:px-8 relative overflow-hidden"
     >
-      <div className="container mx-auto px-4 md:px-8">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-6 featured-love-image border-b-[3px] border-black pb-8">
-          <div>
-            <h2 className="text-4xl md:text-6xl font-black uppercase text-black leading-none drop-shadow-[2px_2px_0px_#e5e5e5] md:drop-shadow-[4px_4px_0px_#e5e5e5] tracking-tighter">
-              LOVE{" "}
-              <span className="font-caesar italic tracking-normal">
-                SIMULATION
-              </span>
-            </h2>
-            <p className="max-w-xl mt-4 text-neutral-600 font-bold uppercase tracking-widest text-sm md:text-base">
-              A futuristic take on romance. High density digital print on
-              premium 240GSM cotton.
-            </p>
-          </div>
+      <div className="container mx-auto">
+        <div className="flex flex-col mb-16 relative z-10">
+          <p className="text-[10px] text-white/40 uppercase tracking-[0.6em] mb-4 font-bold">
+            Data Protocol [LOVE_01]
+          </p>
+          <h2 className="text-4xl md:text-7xl lg:text-9xl font-black uppercase text-white leading-[0.85] tracking-tight">
+            LOVE <br />
+            <span className="text-neutral-600 font-mono scale-x-110 block mt-2">SIMULATION</span>
+          </h2>
+          <p className="max-w-xl mt-8 text-white/50 font-mono uppercase tracking-[0.2em] text-[10px] md:text-xs leading-relaxed border-l border-white/20 pl-6">
+            A futuristic take on romance. Merging glitch aesthetics with 
+            high-fidelity textile engineering. Error: Love not found.
+          </p>
+        </div>
 
+        {/* 4-Image Aesthetic Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-2">
+          {[
+            "/products/love-simulation-red-poster.jpeg",
+            "/products/love-simulation-red-poster-alt.jpeg",
+            "/products/love-simulation-yellow-poster.jpeg",
+            "/products/love-simulation-yellow-poster-alt.jpeg",
+          ].map((src, idx) => (
+            <div key={idx} className="group relative aspect-[3/4] overflow-hidden bg-neutral-900 featured-love-image brightness-90 hover:brightness-100 transition-all duration-700">
+              <Image
+                src={src}
+                alt={`Love Simulation - Visual ${idx + 1}`}
+                fill
+                className="object-cover transition-transform duration-1000 group-hover:scale-105"
+                sizes="(max-width: 768px) 50vw, 25vw"
+              />
+              <div className="absolute inset-0 border border-white/5 group-hover:border-white/20 transition-colors pointer-events-none" />
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-16 flex justify-between items-end">
+          <div className="text-[10px] font-mono text-white/20 uppercase tracking-widest hidden md:block">
+            System Status: Active // Collection: Featured
+          </div>
           <Link
-            href={`/product/${loveProduct.id}`}
-            className="group flex flex-none items-center gap-2 bg-black text-white px-6 md:px-8 py-3 md:py-4 rounded-full font-black uppercase text-sm md:text-base tracking-widest hover:-translate-y-1 transition-transform cursor-pointer shadow-[3px_3px_0px_#e5e5e5] md:shadow-[6px_6px_0px_#e5e5e5] border-2 border-black"
+            href="/product/5"
+            className="group flex items-center gap-6 bg-white text-black px-10 py-5 font-black uppercase text-sm tracking-widest hover:bg-neutral-200 transition-all cursor-pointer"
           >
-            <span>Shop Collection </span>
-            <span className="text-xl leading-none group-hover:rotate-45 transition-transform">
-              ↗
+            <span>Run Simulation</span>
+            <span className="text-xl leading-none group-hover:translate-x-2 transition-transform">
+              →
             </span>
           </Link>
         </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-1 md:gap-2">
-          {/* The Tee Card */}
-          <div className="featured-love-image product-card group relative bg-white flex flex-col pb-4">
-            <Link
-              href={`/product/${loveProduct.id}`}
-              className="block relative grow mb-3"
-            >
-              <div className="relative aspect-3/4 overflow-hidden bg-neutral-100 mb-0 z-0">
-                <Image
-                  src="/love-tee-mock.jpg"
-                  alt="Love Simulation Tee"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-                <div className="absolute top-2 left-2 bg-white text-black text-[9px] font-bold uppercase px-2 py-1 tracking-widest">
-                  SALE
-                </div>
-              </div>
-            </Link>
-            <div className="flex flex-col grow px-1">
-              <Link href={`/product/${loveProduct.id}`} className="block mb-4">
-                <h3 className="text-[11px] md:text-xs font-semibold uppercase text-black tracking-wider mb-1 truncate">
-                  Love Simulation Tee
-                </h3>
-                <div className="flex items-center gap-2">
-                  <span className="text-[14px] md:text-base font-black text-black/60 group-hover:text-black transition-colors">
-                    ₹1,095
-                  </span>
-                  <span className="text-[11px] md:text-xs text-neutral-400 line-through font-bold">
-                    ₹1,999
-                  </span>
-                </div>
-              </Link>
-              <div className="mt-auto">
-                <button
-                  onClick={handleAddToCart}
-                  className="w-full bg-transparent text-black border border-black text-[10px] md:text-xs uppercase py-2.5 tracking-widest hover:bg-black hover:text-white transition-colors duration-300 flex justify-center items-center gap-2"
-                >
-                  <ShoppingCart className="w-3.5 h-3.5" />
-                  <span>Add To Cart</span>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
+
   );
 }
