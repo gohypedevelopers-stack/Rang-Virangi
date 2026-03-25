@@ -15,11 +15,18 @@ export default function Home() {
       {/* 1 — Cinematic Main Hero (Fixed) */}
       <VideoBanner />
 
-      {/* 2 — Top Selling Products */}
-      <TopSelling />
+      {/* 9 — Product Categories / Showcase */}
+      <ScrollReveal animation="fade-up" className="relative z-10">
+        <ProductShowcase />
+      </ScrollReveal>
+
+
 
       {/* 3 — Consolidated Seasonal Banners Carousel */}
       <BannerCarousel />
+
+      {/* 2 — Top Selling Products */}
+      <TopSelling />
 
       {/* 4 — Featured Sugar Daddy */}
       <ScrollReveal animation="fade-up" className="relative z-10">
@@ -49,10 +56,7 @@ export default function Home() {
         <FeaturedLove />
       </ScrollReveal>
 
-      {/* 9 — Product Categories / Showcase */}
-      <ScrollReveal animation="fade-up" className="relative z-10">
-        <ProductShowcase />
-      </ScrollReveal>
+
     </div>
   );
 }

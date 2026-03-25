@@ -10,26 +10,32 @@ export function SmoothScrolling({ children }: { children: ReactNode }) {
     // Register GSAP plugin
     gsap.registerPlugin(ScrollTrigger);
 
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      smoothWheel: true,
-      wheelMultiplier: 1,
-      touchMultiplier: 2,
-    });
+    let lenis: Lenis;
+    const timeoutId = setTimeout(() => {
+      lenis = new Lenis({
+        duration: 1.0,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        wheelMultiplier: 1,
+        touchMultiplier: 2,
+      });
 
-    // Sync Lenis with GSAP ScrollTrigger
-    lenis.on('scroll', ScrollTrigger.update);
+      // Sync Lenis with GSAP ScrollTrigger
+      lenis.on('scroll', ScrollTrigger.update);
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
+      gsap.ticker.add((time) => {
+        lenis.raf(time * 1000);
+      });
 
-    gsap.ticker.lagSmoothing(0);
+      gsap.ticker.lagSmoothing(1000, 16);
+    }, 150);
 
     return () => {
-      lenis.destroy();
-      gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      clearTimeout(timeoutId);
+      if (lenis) {
+        lenis.destroy();
+        gsap.ticker.remove((time) => lenis.raf(time * 1000));
+      }
     };
   }, []);
 

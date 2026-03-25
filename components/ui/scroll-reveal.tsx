@@ -36,23 +36,37 @@ export function ScrollReveal({
       fromVars = { opacity: 0, rotation: 10, y: 50 };
     }
 
-    gsap.fromTo(element, fromVars, {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      rotation: 0,
-      duration: duration,
-      delay: delay,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: element,
-        start: "top 85%", // Trigger when top of element hits 85% of viewport height
-        toggleActions: "play none none reverse",
-      },
-    });
+    const init = () => {
+      const ctx = gsap.context(() => {
+        gsap.fromTo(element, fromVars, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          rotation: 0,
+          duration: duration,
+          delay: delay,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: element,
+            start: "top 85%",
+            toggleActions: "play none none reverse",
+            fastScrollEnd: true,
+            scrub: false,
+          },
+        });
+      });
+      return ctx;
+    };
+
+    // Delay initialization slightly to let hydration finish
+    let ctx: gsap.Context;
+    const timeoutId = setTimeout(() => {
+      ctx = init();
+    }, 100);
 
     return () => {
-      ScrollTrigger.getAll().forEach((t) => t.kill());
+      clearTimeout(timeoutId);
+      if (ctx) ctx.revert();
     };
   }, [animation, delay, duration]);
 

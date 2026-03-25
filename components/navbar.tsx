@@ -118,8 +118,8 @@ export function Navbar() {
   return (
     <nav
       ref={navRef}
-      className={`fixed top-0 left-0 w-full z-50 py-3 px-6 transition-all duration-300 backdrop-blur-md shadow-sm ${
-        isScrolled ? "bg-black/95 text-white" : "bg-white text-black"
+      className={`fixed top-0 left-0 w-full z-50 py-3 px-6 transition-[background-color,color,padding] duration-300 backdrop-blur-md shadow-sm ${
+        isScrolled ? "bg-black/95 text-white" : "bg-white/80 text-black"
       }`}
     >
       <div className="mx-auto flex items-center justify-between relative w-full md:px-4 lg:px-8">
@@ -141,11 +141,11 @@ export function Navbar() {
         >
           <Link href="/" className="flex items-center">
             <Image
-              src={isScrolled ? "/logo1.png" : "/logo.jpeg"}
+              src="https://i.postimg.cc/wMJmPVMW/logo-removebg-preview.png"
               alt="Rang Virangi Logo"
               width={180}
               height={50}
-              className="h-10 md:h-14 w-auto object-contain transition-all duration-300"
+              className={`h-10 md:h-14 w-auto object-contain transition-all duration-300 ${isScrolled ? "invert" : ""}`}
               priority
             />
           </Link>
@@ -365,7 +365,7 @@ export function Navbar() {
                   className="flex items-center"
                 >
                   <Image
-                    src="/logo.jpeg"
+                    src="https://i.postimg.cc/wMJmPVMW/logo-removebg-preview.png"
                     alt="Rang Virangi Logo"
                     width={150}
                     height={40}

@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules';
 
@@ -38,6 +38,18 @@ const customSwiperStyles = `
 `;
 
 export function BannerCarousel() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Delay mounting slightly to avoid hydration jam, but keep it snappy
+    const timer = setTimeout(() => setMounted(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!mounted) return (
+    <section className="w-full relative h-[65vh] md:h-[75vh] lg:h-[85vh] bg-black animate-pulse" />
+  );
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: customSwiperStyles }} />
@@ -47,9 +59,9 @@ export function BannerCarousel() {
           effect="fade"
           fadeEffect={{ crossFade: true }}
           loop={true}
-          speed={1000}
+          speed={1500}
           autoplay={{
-            delay: 1000,
+            delay: 4000,
             disableOnInteraction: false,
           }}
           pagination={{
