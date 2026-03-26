@@ -16,9 +16,9 @@ export default function ContactPage() {
                     <p className="text-neutral-500 font-bold text-xs md:text-sm tracking-[0.4em] mb-6 uppercase">
                         We're Here for You
                     </p>
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 uppercase leading-tight">
-                        Get In <br />
-                        <span className="italic font-mono border-b-[6px] border-black pb-1 inline-block mt-2">
+                    <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter mb-8 uppercase leading-tight flex items-center justify-center gap-4 flex-wrap">
+                        <span>Get In</span>
+                        <span className="italic font-mono border-b-[6px] border-black pb-1">
                             Touch
                         </span>
                     </h1>
@@ -56,16 +56,16 @@ export default function ContactPage() {
                                 </div>
                             </div>
 
-                            <div className="flex items-start gap-6 group cursor-pointer">
+                             <div className="flex items-start gap-6 group cursor-pointer">
                                 <div className="p-4 bg-black text-white rounded-full shrink-0 group-hover:scale-110 transition-transform duration-300">
                                     <MapPin className="w-6 h-6" />
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-bold tracking-tight mb-1">Visit Us</h3>
                                     <p className="text-neutral-600 mb-2">Come say hello at our headquarters.</p>
-                                    <p className="font-bold text-black">
-                                        123 Fashion Ave, Suite 400<br />
-                                        New Delhi, India 110001
+                                    <p className="font-bold text-black leading-relaxed">
+                                        Plot No. 42, Pocket B, Okhla Phase III,<br />
+                                        New Delhi, Delhi 110020, India
                                     </p>
                                 </div>
                             </div>
@@ -76,9 +76,9 @@ export default function ContactPage() {
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-bold tracking-tight mb-1">Call Us</h3>
-                                    <p className="text-neutral-600 mb-2">Mon-Fri from 9am to 6pm IST.</p>
-                                    <a href="tel:+911234567890" className="font-bold border-b border-black text-black pb-0.5 hover:text-neutral-600 transition-colors">
-                                        +91 123 456 7890
+                                    <p className="text-neutral-600 mb-2">Mon-Fri from 10am to 7pm IST.</p>
+                                    <a href="tel:+919871234567" className="font-bold border-b border-black text-black pb-0.5 hover:text-neutral-600 transition-colors">
+                                        +91 98712 34567
                                     </a>
                                 </div>
                             </div>

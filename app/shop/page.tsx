@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
@@ -38,23 +40,38 @@ const SORT_OPTIONS = [
   "Price: High to Low",
 ];
 
-export default function ShopPage() {
+function ShopContent() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [activeSizes, setActiveSizes] = useState<string[]>([]);
   const [activeColors, setActiveColors] = useState<string[]>([]);
   const [sortBy, setSortBy] = useState("Featured");
 
+  const searchParams = useSearchParams();
+
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const searchParams = new URLSearchParams(window.location.search);
-      const sortParam = searchParams.get("sort");
-      if (sortParam === "new-arrivals") {
-        setSortBy("New Arrivals");
-      } else if (sortParam === "sale" || sortParam === "Sale") {
-        setSortBy("Sale");
-      }
+    const sortParam = searchParams.get("sort");
+    const categoryParam = searchParams.get("category");
+
+    if (sortParam === "new-arrivals") {
+      setSortBy("New Arrivals");
+    } else if (sortParam === "sale" || sortParam === "Sale") {
+      setSortBy("Sale");
+    } else if (!sortParam) {
+      setSortBy("Featured");
     }
-  }, []);
+
+    if (categoryParam) {
+      // Find the category case-insensitively just in case
+      const foundCategory = CATEGORIES.find(
+        (c) => c.toLowerCase() === categoryParam.toLowerCase(),
+      );
+      if (foundCategory) {
+        setActiveCategory(foundCategory);
+      }
+    } else {
+      setActiveCategory("All");
+    }
+  }, [searchParams]);
 
   const { addToCart } = useCart();
 
@@ -543,5 +560,13 @@ export default function ShopPage() {
         )}
       </AnimatePresence>
     </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-background flex items-center justify-center font-black uppercase tracking-widest text-xl">Loading Store...</div>}>
+      <ShopContent />
+    </Suspense>
   );
 }

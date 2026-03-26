@@ -48,27 +48,27 @@ export default function AboutPage() {
 
                     <div className="space-y-6">
                         <h2 className="text-3xl md:text-5xl font-black tracking-tight text-black uppercase">The Origin Story</h2>
-                        <p className="text-neutral-600">
+                        <p className="text-neutral-600 text-justify">
                             Welcome to Rang Virangi. We’re not just a clothing brand; we’re a movement to rebuild your everyday wardrobe from the fabric up. Born out of frustration with a fashion industry caught between cheap, disposable fast fashion and inaccessible luxury hype, we set out to create something better.
                         </p>
-                        <p className="text-neutral-600">
+                        <p className="text-neutral-600 text-justify">
                             Our journey started when we realized that quality basics were being entirely forgotten. We were tired of standard cotton tees that looked incredible on launch day but lost their shape, softness, and soul after just a few washes.
                         </p>
                     </div>
 
                     <div className="space-y-6">
                         <h2 className="text-3xl md:text-5xl font-black tracking-tight text-black uppercase">Our Mission & Quality Promise</h2>
-                        <p className="text-neutral-600">
+                        <p className="text-neutral-600 text-justify">
                             We wanted clothing that masterfully balances function and emotion, street flair and sophistication. That’s when we discovered bamboo cotton—nature’s most underrated luxury fiber. Softer than standard cotton, naturally breathable, and thermoregulating, it moves with you rather than against you.
                         </p>
-                        <p className="text-neutral-600">
+                        <p className="text-neutral-600 text-justify">
                             Our mission is to bring you premium streetwear and elevated basics that absolutely never compromise on quality or sustainability. Our quality promise is woven into every single thread: meticulously crafted for an effortless, tailored fit, unparalleled all-day comfort, and long-lasting durability.
                         </p>
                     </div>
 
                     <div className="space-y-6">
                         <h2 className="text-3xl md:text-5xl font-black tracking-tight text-black uppercase">What Makes Us Different?</h2>
-                        <p className="text-neutral-600">
+                        <p className="text-neutral-600 text-justify">
                             What sets Rang Virangi apart? We focus fiercely on sustainable luxury but leave the elitist price tag at the door. Quality isn&apos;t a seasonal gimmick for us; it&apos;s a daily mindset. We create timeless, modern streetwear pieces that are thoughtfully considered, sustainably crafted, and designed to be worn every damn day.
                         </p>
                     </div>

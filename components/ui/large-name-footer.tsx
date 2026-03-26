@@ -7,12 +7,17 @@ function Footer() {
       <div className="w-full">
         <div className="flex flex-col md:flex-row justify-between">
           <div className="mb-10 md:mb-0 max-w-sm">
-            <h2 className="font-black uppercase text-2xl mb-2 drop-shadow-[1px_1px_0px_#e5e5e5] text-black">RANG VIRANGI</h2>
+            <Link href="/" className="inline-block mb-6">
+              <img
+                src="https://i.postimg.cc/wMJmPVMW/logo-removebg-preview.png"
+                alt="Rang Virangi Logo"
+                className="h-10 md:h-12 w-auto object-contain"
+              />
+            </Link>
             <p className="text-neutral-500 font-bold text-[10px] uppercase tracking-[0.1em] leading-loose">
               PREMIUM STREETWEAR COLLECTION. REDEFINING FASHION WITH BOLD
               DESIGNS AND QUALITY CRAFTSMANSHIP.
             </p>
-
             {/* Newsletter */}
             <div className="mt-8 max-w-xs">
               <p className="text-[10px] font-black uppercase tracking-widest mb-2 text-black">GET UPDATES</p>
@@ -54,7 +59,7 @@ function Footer() {
                 </li>
                 <li>
                   <Link
-                    href="/shop/hoodies"
+                    href="/shop?category=Hoodies"
                     className="text-[10px] uppercase font-bold tracking-[0.12em] text-neutral-400 hover:text-black transition-colors"
                   >
                     Hoodies

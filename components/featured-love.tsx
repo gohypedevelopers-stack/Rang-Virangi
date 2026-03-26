@@ -63,15 +63,15 @@ export function FeaturedLove() {
       className="w-full bg-black text-white py-20 px-4 md:px-8 relative overflow-hidden"
     >
       <div className="container mx-auto">
-        <div className="flex flex-col mb-16 relative z-10">
-          <p className="text-[10px] text-white/40 uppercase tracking-[0.6em] mb-4 font-bold">
+        <div className="flex flex-col mb-16 relative z-10 group">
+          <p className="text-[10px] text-white/40 uppercase tracking-[0.6em] mb-6 font-bold">
             Data Protocol [LOVE_01]
           </p>
-          <h2 className="text-4xl md:text-7xl lg:text-9xl font-black uppercase text-white leading-[0.85] tracking-tight">
+          <h2 className="text-5xl md:text-8xl lg:text-[10rem] font-black uppercase text-white leading-[0.75] tracking-tighter">
             LOVE <br />
-            <span className="text-neutral-600 font-mono scale-x-110 block mt-2">SIMULATION</span>
+            <span className="text-neutral-500 font-mono block mt-1 tracking-[0.05em] text-3xl md:text-6xl lg:text-7xl group-hover:text-white/60 transition-all duration-700">SIMULATION</span>
           </h2>
-          <p className="max-w-xl mt-8 text-white/50 font-mono uppercase tracking-[0.2em] text-[10px] md:text-xs leading-relaxed border-l border-white/20 pl-6">
+          <p className="max-w-xl mt-12 text-white/50 font-mono uppercase tracking-[0.2em] text-[10px] md:text-xs leading-relaxed border-l border-white/20 pl-6">
             A futuristic take on romance. Merging glitch aesthetics with 
             high-fidelity textile engineering. Error: Love not found.
           </p>
